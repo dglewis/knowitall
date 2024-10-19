@@ -3,12 +3,14 @@
         "id": 1,
         "question": "What protocol is used for federated authentication in PingOne?",
         "options": ["SAML", "OAuth 2.0", "OIDC", "LDAP"],
-        "answer": "OIDC"
+        "answer": "OIDC",
+        "type": "radio"
     },
     {
         "id": 2,
         "question": "Which scripting language is supported by PingOne for customization?",
         "options": ["Python", "Ruby", "JavaScript", "PHP"],
-        "answer": "JavaScript"
+        "answer": "JavaScript",
+        "type": "radio"
     }
 ]

@@ -6,7 +6,9 @@ let score = 0;
 document.addEventListener('DOMContentLoaded', () => {
     fetchQuestions();
     document.getElementById('next-btn').addEventListener('click', showNextQuestion);
+    document.getElementById('prev-btn').addEventListener('click', showPreviousQuestion);
     document.getElementById('flag-btn').addEventListener('click', flagCurrentQuestion);
+    document.getElementById('review-btn').addEventListener('click', reviewFlaggedQuestions);
 });
 
 function fetchQuestions() {
@@ -15,6 +17,7 @@ function fetchQuestions() {
         .then(data => {
             questions = data;
             displayQuestion(questions[currentQuestionIndex]);
+            updateProgress();
         })
         .catch(error => {
             console.error('Error fetching questions:', error);
@@ -30,36 +33,55 @@ function displayQuestion(question) {
     optionsElement.innerHTML = ''; // Clear previous options
     feedbackElement.textContent = ''; // Clear previous feedback
 
-    question.options.forEach(option => {
-        const button = document.createElement('button');
-        button.textContent = option;
-        button.onclick = () => checkAnswer(option, question.answer);
-        optionsElement.appendChild(button);
-    });
+    if (question.type === 'radio') {
+        question.options.forEach(option => {
+            const label = document.createElement('label');
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'option';
+            input.value = option;
+            label.appendChild(input);
+            label.appendChild(document.createTextNode(option));
+            optionsElement.appendChild(label);
+        });
+    }
 }
 
-function checkAnswer(selectedOption, correctAnswer) {
+function checkAnswer() {
+    const selectedOption = document.querySelector('input[name="option"]:checked');
     const feedbackElement = document.getElementById('feedback');
-    if (selectedOption === correctAnswer) {
+    if (selectedOption && selectedOption.value === questions[currentQuestionIndex].answer) {
         score++;
         feedbackElement.textContent = 'Correct!';
     } else {
         feedbackElement.textContent = 'Try again!';
     }
-    updateScore();
 }
 
-function updateScore() {
-    const scoreElement = document.getElementById('score');
-    scoreElement.textContent = `Score: ${score}`;
+function updateProgress() {
+    const progressElement = document.getElementById('progress');
+    progressElement.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
 }
 
 function showNextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
+    checkAnswer();
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
         displayQuestion(questions[currentQuestionIndex]);
+        updateProgress();
     } else {
-        alert('You have reached the end of the quiz!');
+        document.getElementById('feedback').textContent = `Final Score: ${score}`;
+        document.getElementById('score').style.display = 'none'; // Hide score during quiz
+    }
+}
+
+function showPreviousQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        displayQuestion(questions[currentQuestionIndex]);
+        updateProgress();
+    } else {
+        document.getElementById('feedback').textContent = 'This is the first question!';
     }
 }
 
@@ -71,5 +93,16 @@ function flagCurrentQuestion() {
         feedbackElement.textContent = 'Question flagged for review.';
     } else {
         feedbackElement.textContent = 'This question is already flagged.';
+    }
+}
+
+function reviewFlaggedQuestions() {
+    if (flaggedQuestions.length > 0) {
+        currentQuestionIndex = questions.indexOf(flaggedQuestions[0]);
+        displayQuestion(questions[currentQuestionIndex]);
+        flaggedQuestions.shift(); // Remove the reviewed question from the list
+        updateProgress();
+    } else {
+        document.getElementById('feedback').textContent = 'No flagged questions to review.';
     }
 }
