@@ -24,9 +24,11 @@ function fetchQuestions() {
 function displayQuestion(question) {
     const questionElement = document.getElementById('question');
     const optionsElement = document.getElementById('options');
+    const feedbackElement = document.getElementById('feedback');
 
     questionElement.textContent = question.question;
     optionsElement.innerHTML = ''; // Clear previous options
+    feedbackElement.textContent = ''; // Clear previous feedback
 
     question.options.forEach(option => {
         const button = document.createElement('button');
@@ -37,11 +39,12 @@ function displayQuestion(question) {
 }
 
 function checkAnswer(selectedOption, correctAnswer) {
+    const feedbackElement = document.getElementById('feedback');
     if (selectedOption === correctAnswer) {
         score++;
-        alert('Correct!');
+        feedbackElement.textContent = 'Correct!';
     } else {
-        alert('Try again!');
+        feedbackElement.textContent = 'Try again!';
     }
     updateScore();
 }
@@ -62,10 +65,11 @@ function showNextQuestion() {
 
 function flagCurrentQuestion() {
     const currentQuestion = questions[currentQuestionIndex];
+    const feedbackElement = document.getElementById('feedback');
     if (!flaggedQuestions.includes(currentQuestion)) {
         flaggedQuestions.push(currentQuestion);
-        alert('Question flagged for review.');
+        feedbackElement.textContent = 'Question flagged for review.';
     } else {
-        alert('This question is already flagged.');
+        feedbackElement.textContent = 'This question is already flagged.';
     }
 }
