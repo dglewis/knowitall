@@ -13,4 +13,39 @@
         "answer": "JavaScript",
         "type": "radio"
     }
+    ,
+    {
+        "id": 3,
+        "question": "Which of the following are valid PingOne authentication policies? (Select all that apply)",
+        "options": ["Single Factor", "Multi Factor", "Progressive", "Risk-Based"],
+        "answer": ["Single Factor", "Multi Factor", "Progressive"],
+        "type": "checkbox"
+    },
+    {
+        "id": 4,
+        "question": "What is the maximum session length (in hours) that can be configured for a PingOne application?",
+        "options": ["12", "24", "48", "72"],
+        "answer": "72",
+        "type": "radio"
+    },
+    {
+        "id": 5,
+        "question": "Fill in the blank: The _______ protocol is used for secure token-based authorization in PingOne.",
+        "options": [],
+        "answer": "OAuth 2.0",
+        "type": "text"
+    },
+    {
+        "id": 6,
+        "question": "Order the following steps in a typical OIDC authentication flow:",
+        "options": [
+            "User attempts to access protected resource",
+            "Authorization request to authorization endpoint",
+            "User authenticates",
+            "Authorization code returned to application",
+            "Token request with authorization code"
+        ],
+        "answer": [1, 2, 3, 4, 5],
+        "type": "ordering"
+    }
 ]
