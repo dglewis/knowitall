@@ -14,13 +14,20 @@
         </div>
         <div class="navigation">
             <button id="prev-btn">Previous</button>
+            <button id="submit-btn" class="submit-btn">Submit</button>
             <button id="next-btn">Next</button>
-            <button id="flag-btn">Flag for Review</button>
+            <button id="flag-btn" class="flag-btn">Flag for Review</button>
             <button id="review-btn">Review Flagged</button>
         </div>
         <div id="score">Score: 0</div>
         <div id="feedback" class="feedback"></div>
         <div id="progress" class="progress">Question 1 of n</div>
+    </div>
+    <!-- Move flagged-screen outside of container -->
+    <div id="flagged-screen" class="hidden">
+        <h2>Flagged Questions</h2>
+        <ul id="flagged-list"></ul>
+        <button id="back-btn">Back to Quiz</button>
     </div>
     <script src="/app.js"></script>
 </body>
