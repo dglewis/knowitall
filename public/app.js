@@ -250,15 +250,21 @@ function showFlaggedScreen() {
             const listItem = document.createElement('li');
             listItem.textContent = `Question ${questionIndex + 1}`;
             listItem.style.cursor = 'pointer';
-            listItem.onclick = () => {
+            listItem.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent event bubbling
                 currentQuestionIndex = questionIndex;
                 displayQuestion(questions[currentQuestionIndex]);
                 updateProgress();
                 backToQuiz();
-            };
+            });
             flaggedList.appendChild(listItem);
         });
     }
+
+    // Prevent clicks on the flagged screen from bubbling up
+    flaggedScreen.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
 
     container.classList.add('hidden');
     flaggedScreen.classList.remove('hidden');
