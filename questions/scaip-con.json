@@ -1,0 +1,53 @@
+{
+    "name": "SCAIP - Connectors",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which type of connector in Saviynt allows data synchronization with cloud applications?",
+        "options": [
+          "LDAP Connector",
+          "REST Connector",
+          "File-based Connector",
+          "Database Connector"
+        ],
+        "answer": "REST Connector",
+        "type": "radio"
+      },
+      {
+        "id": 2,
+        "question": "What is the primary purpose of the 'Reconcile Data' feature in Saviynt’s connector configurations?",
+        "options": [
+          "To pull account data from external sources",
+          "To establish API connections",
+          "To execute SoD checks",
+          "To manage approval workflows"
+        ],
+        "answer": "To pull account data from external sources",
+        "type": "radio"
+      },
+      {
+        "id": 3,
+        "question": "Which of the following is NOT supported by Saviynt's REST connectors?",
+        "options": [
+          "Provisioning",
+          "De-provisioning",
+          "Real-time notifications",
+          "Synchronization"
+        ],
+        "answer": "Real-time notifications",
+        "type": "radio"
+      },
+      {
+        "id": 4,
+        "question": "Which setting would you configure to ensure continuous synchronization of accounts with Saviynt?",
+        "options": [
+          "Periodic Reconciliation",
+          "Event-Based Provisioning",
+          "Scheduled Sync",
+          "Dynamic Role Sync"
+        ],
+        "answer": "Periodic Reconciliation",
+        "type": "radio"
+      }
+    ]
+  }

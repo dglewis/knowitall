@@ -7,7 +7,16 @@ let currentQuestionAnswered = false;
 let draggedItem = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchQuestions();
+    // Add menu button handler first
+    document.getElementById('menu-btn').addEventListener('click', () => {
+        window.location.href = '/';
+    });
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const bank = urlParams.get('bank');
+    if (bank) {
+        fetchQuestions(bank);
+    }
     document.getElementById('next-btn').addEventListener('click', showNextQuestion);
     document.getElementById('prev-btn').addEventListener('click', showPreviousQuestion);
     document.getElementById('submit-btn').addEventListener('click', submitAnswer);
@@ -21,18 +30,61 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('review-btn').addEventListener('click', showFlaggedScreen);
     document.getElementById('back-btn').addEventListener('click', backToQuiz);
+    document.getElementById('start-quiz').addEventListener('click', () => {
+        const selectedBank = document.getElementById('question-bank').value;
+        fetch(`/questions/${selectedBank}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                questions = data.questions; // Access the questions array from the wrapper object
+                currentQuestionIndex = 0;
+                displayQuestion(questions[currentQuestionIndex]);
+                updateProgress();
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+            });
+    });
 });
 
-function fetchQuestions() {
-    fetch('/questions')
+function fetchQuestionBanks() {
+    fetch('/question-banks')
         .then(response => response.json())
         .then(data => {
-            questions = data;
+            const questionBankSelect = document.getElementById('question-bank');
+            questionBankSelect.innerHTML = ''; // Clear existing options
+            data.forEach(bank => {
+                const option = document.createElement('option');
+                option.value = bank;
+                option.textContent = bank.replace('.json', ''); // Display without .json
+                questionBankSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching question banks:', error);
+        });
+}
+
+function fetchQuestions(bank) {
+    fetch(`/questions/${bank}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            questions = data.questions;
             displayQuestion(questions[currentQuestionIndex]);
             updateProgress();
         })
         .catch(error => {
             console.error('Error fetching questions:', error);
+            document.getElementById('question').textContent = 'Failed to load questions.';
         });
 }
 

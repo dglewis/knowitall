@@ -1,0 +1,63 @@
+{
+    "name": "SCAIP - Access Request System - Advanced",
+    "questions": [
+      {
+        "id": 1,
+        "question": "In Saviynt’s Access Request System, which feature allows for customized access request forms?",
+        "options": [
+          "Dynamic Attributes",
+          "Workflow Configurations",
+          "Auto-Approve Workflows",
+          "SoD Checks"
+        ],
+        "answer": "Dynamic Attributes",
+        "type": "radio"
+      },
+      {
+        "id": 2,
+        "question": "Which workflow feature in Saviynt's Access Request System allows for parallel approvals from multiple approvers?",
+        "options": [
+          "Serial Workflow",
+          "Multi-Stage Workflow",
+          "Parallel Workflow",
+          "Risk-Based Workflow"
+        ],
+        "answer": "Parallel Workflow",
+        "type": "radio"
+      },
+      {
+        "id": 3,
+        "question": "Which of the following are valid reasons for utilizing Bulk Request submission in Saviynt? (Select all that apply)",
+        "options": [
+          "For onboarding multiple users",
+          "For submitting multiple access requests for a single user",
+          "For removing access from terminated users",
+          "For transferring accounts between users"
+        ],
+        "answer": [
+          "For onboarding multiple users",
+          "For submitting multiple access requests for a single user"
+        ],
+        "type": "checkbox"
+      },
+      {
+        "id": 4,
+        "question": "What is the recommended approach if an access request results in a Segregation of Duties (SoD) violation in Saviynt?",
+        "options": [
+          "Deny the request automatically",
+          "Route the request to a designated compliance approver",
+          "Send the request for auto-approval",
+          "Log the violation but approve the request"
+        ],
+        "answer": "Route the request to a designated compliance approver",
+        "type": "radio"
+      },
+      {
+        "id": 5,
+        "question": "Fill in the blank: To streamline request submissions, Saviynt allows users to submit _______ requests, enabling them to request access for multiple users or applications at once.",
+        "options": [],
+        "answer": "Bulk",
+        "type": "text"
+      }
+    ]
+  }

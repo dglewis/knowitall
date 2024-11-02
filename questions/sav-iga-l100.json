@@ -1,0 +1,113 @@
+{
+  "name": "Saviynt Certified IGA Professional",
+  "questions": [
+    {
+      "id": 1,
+      "question": "What primary purpose does the Identity Warehouse serve in Saviynt?",
+      "options": [
+        "Centralized storage of user profiles and attributes",
+        "To store all access policies and workflows",
+        "A repository for unstructured data analytics",
+        "A backup system for enterprise security data"
+      ],
+      "answer": "Centralized storage of user profiles and attributes",
+      "type": "radio"
+    },
+    {
+      "id": 2,
+      "question": "Which of the following actions can be performed by an End User in Saviynt’s Access Request System? (Select all that apply)",
+      "options": [
+        "Submit requests for resource access",
+        "Approve access requests for their direct reports",
+        "View request history and status",
+        "Set up new approval workflows"
+      ],
+      "answer": [
+        "Submit requests for resource access",
+        "View request history and status"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 3,
+      "question": "What is the minimum passing score required to achieve Saviynt Certified IGA Professional status?",
+      "options": ["50%", "60%", "65%", "70%"],
+      "answer": "70%",
+      "type": "radio"
+    },
+    {
+      "id": 4,
+      "question": "Fill in the blank: The _______ role in Saviynt typically performs the technical configurations and manages platform-level administration tasks.",
+      "options": [],
+      "answer": "Administrator",
+      "type": "text"
+    },
+    {
+      "id": 5,
+      "question": "In Saviynt, which feature is specifically designed to ensure users receive only the necessary access permissions to perform their roles?",
+      "options": [
+        "Segregation of Duties (SoD)",
+        "Entitlement Discovery",
+        "Least Privilege Principle",
+        "Privileged Access Management"
+      ],
+      "answer": "Least Privilege Principle",
+      "type": "radio"
+    },
+    {
+      "id": 6,
+      "question": "Order the steps in Saviynt’s typical access request flow:",
+      "options": [
+        "User submits an access request form",
+        "Access is provisioned to the user",
+        "Request is routed to an approver",
+        "User logs into the system"
+      ],
+      "answer": [4, 1, 3, 2],
+      "type": "ordering"
+    },
+    {
+      "id": 7,
+      "question": "Which component in Saviynt IGA is responsible for managing users’ application entitlements across the organization?",
+      "options": [
+        "Role Management",
+        "Group Management",
+        "Policy Engine",
+        "Certification Campaigns"
+      ],
+      "answer": "Group Management",
+      "type": "radio"
+    },
+    {
+      "id": 8,
+      "question": "Which authentication methods does Saviynt’s Enterprise Identity Cloud (EIC) support for Single Sign-On (SSO)? (Select all that apply)",
+      "options": ["SAML", "OAuth", "LDAP", "Kerberos"],
+      "answer": ["SAML", "LDAP"],
+      "type": "checkbox"
+    },
+    {
+      "id": 9,
+      "question": "What is the key advantage of Saviynt's Analytics module in IGA?",
+      "options": [
+        "Automates access request approvals",
+        "Provides risk-based access and compliance insights",
+        "Allows integration with cloud storage systems",
+        "Optimizes real-time data backup"
+      ],
+      "answer": "Provides risk-based access and compliance insights",
+      "type": "radio"
+    },
+    {
+      "id": 10,
+      "question": "Which certification process in Saviynt aims to assess and validate users' access to critical resources?",
+      "options": [
+        "SoD Checks",
+        "Compliance Campaigns",
+        "Access Reviews",
+        "Identity Warehouse"
+      ],
+      "answer": "Access Reviews",
+      "type": "radio"
+    }
+  ]
+}

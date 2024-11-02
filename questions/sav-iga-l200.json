@@ -1,0 +1,123 @@
+{
+  "name": "Saviynt Certified Advanced IGA Professional",
+  "questions": [
+    {
+      "id": 1,
+      "question": "In Saviynt’s Advanced Access Request System, which feature allows for customized access request forms?",
+      "options": [
+        "Dynamic Attributes",
+        "Workflow Configurations",
+        "Auto-Approve Workflows",
+        "SoD Checks"
+      ],
+      "answer": "Dynamic Attributes",
+      "type": "radio"
+    },
+    {
+      "id": 2,
+      "question": "Which types of data are commonly managed by Saviynt’s REST connector for advanced integrations? (Select all that apply)",
+      "options": [
+        "User Profiles",
+        "Entitlement Data",
+        "Approval Workflows",
+        "Access Request History"
+      ],
+      "answer": ["User Profiles", "Entitlement Data"],
+      "type": "checkbox"
+    },
+    {
+      "id": 3,
+      "question": "What is the purpose of Service Account Management in Saviynt?",
+      "options": [
+        "To manage user accounts and entitlements",
+        "To control access for privileged and non-human accounts",
+        "To automate workflows",
+        "To optimize role-based access"
+      ],
+      "answer": "To control access for privileged and non-human accounts",
+      "type": "radio"
+    },
+    {
+      "id": 4,
+      "question": "Fill in the blank: Saviynt’s _______ feature enables the detection and merging of duplicate identities in an organization’s identity ecosystem.",
+      "options": [],
+      "answer": "Duplicate Identity Management",
+      "type": "text"
+    },
+    {
+      "id": 5,
+      "question": "Which functionality does the Saviynt API enable in relation to identity management? (Select all that apply)",
+      "options": [
+        "Creating user requests",
+        "Performing access reviews",
+        "Modifying workflows",
+        "Automating service account provisioning"
+      ],
+      "answer": [
+        "Creating user requests",
+        "Automating service account provisioning"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 6,
+      "question": "What is the role of Peer Access Analytics within Saviynt?",
+      "options": [
+        "Detects SoD conflicts",
+        "Identifies access recommendations based on peer behavior",
+        "Manages access requests",
+        "Analyzes user login activity"
+      ],
+      "answer": "Identifies access recommendations based on peer behavior",
+      "type": "radio"
+    },
+    {
+      "id": 7,
+      "question": "Which of the following best describes the integration between Saviynt and ServiceNow?",
+      "options": [
+        "Integration that allows automated entitlement discovery",
+        "Allows ServiceNow to handle identity ticketing requests",
+        "Automatically configures SoD policies in ServiceNow",
+        "Manages cloud storage for Saviynt"
+      ],
+      "answer": "Allows ServiceNow to handle identity ticketing requests",
+      "type": "radio"
+    },
+    {
+      "id": 8,
+      "question": "Order the following steps for configuring SAML-based SSO in Saviynt:",
+      "options": [
+        "Configure IdP Settings",
+        "Upload IdP metadata",
+        "Define SP configurations in EIC",
+        "Test SSO login with IdP"
+      ],
+      "answer": [2, 3, 1, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 9,
+      "question": "What is the primary benefit of integrating IGA with Privileged Access Management (PAM) in Saviynt?",
+      "options": [
+        "Enables enhanced reporting capabilities",
+        "Provides real-time insights into privileged access",
+        "Supports automated role creation",
+        "Simplifies SSO configurations"
+      ],
+      "answer": "Provides real-time insights into privileged access",
+      "type": "radio"
+    },
+    {
+      "id": 10,
+      "question": "What is the purpose of Role Mining in Saviynt’s advanced identity intelligence?",
+      "options": [
+        "To detect SoD conflicts",
+        "To identify suitable roles based on user entitlements",
+        "To manage API integrations",
+        "To analyze data access behavior"
+      ],
+      "answer": "To identify suitable roles based on user entitlements",
+      "type": "radio"
+    }
+  ]
+}

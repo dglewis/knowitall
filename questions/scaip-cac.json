@@ -1,0 +1,44 @@
+{
+    "name": "SCAIP - Campaigns and Certifications",
+    "questions": [
+      {
+        "id": 1,
+        "question": "In Saviynt, which type of campaign focuses on reviewing entitlements of specific applications?",
+        "options": [
+          "User Certification",
+          "Account Certification",
+          "Application Certification",
+          "Entitlement Certification"
+        ],
+        "answer": "Entitlement Certification",
+        "type": "radio"
+      },
+      {
+        "id": 2,
+        "question": "Which of the following are required to launch a certification campaign in Saviynt? (Select all that apply)",
+        "options": [
+          "Define campaign owners",
+          "Set up certification criteria",
+          "Establish approval workflows",
+          "Configure external API integrations"
+        ],
+        "answer": [
+          "Define campaign owners",
+          "Set up certification criteria"
+        ],
+        "type": "checkbox"
+      },
+      {
+        "id": 3,
+        "question": "How does Saviynt enable recertification for specific roles or groups periodically?",
+        "options": [
+          "Campaign Scheduling",
+          "SoD Policies",
+          "Role Re-assignment",
+          "Automated Role Provisioning"
+        ],
+        "answer": "Campaign Scheduling",
+        "type": "radio"
+      }
+    ]
+  }
