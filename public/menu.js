@@ -27,23 +27,14 @@ function fetchQuestionBanks() {
                 return;
             }
             data.forEach(bank => {
-
-                // Show the question bank name in the dropdown
-                console.log(bank);
-                // Fetch the bank file to get its name
+                const option = document.createElement('option');
+                option.value = bank;
                 fetch(`/questions/${bank}`)
                     .then(response => response.json())
                     .then(bankData => {
-                        // Find and update the option text with the bank's name
-                        const option = questionBankSelect.querySelector(`option[value="${bank}"]`);
-                        if (option && bankData.name) {
-                            option.textContent = bankData.name;
-                        }
-                    })
-                    .catch(err => console.error(`Error fetching bank details for ${bank}:`, err));
-                const option = document.createElement('option');
-                option.value = bank;
-                option.textContent = bank.replace('.json', ''); // Display without .json
+                        const description = bankData.description || `${bankData.questions.length} questions`;
+                        option.textContent = `${bankData.name} (${description})`;
+                    });
                 questionBankSelect.appendChild(option);
             });
         })
