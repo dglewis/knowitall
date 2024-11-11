@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KnowItAll - Main Menu</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Welcome to the KnowItAll quiz engine</h1>
-        <label for="question-bank">Select Question Bank:</label>
-        <select id="question-bank"></select>
-        <button id="start-quiz">Start Quiz</button>
+        <div class="search-container">
+            <input type="text" id="bank-filter" placeholder="Search question banks..." autocomplete="off" />
+            <div id="search-results" class="search-results"></div>
+        </div>
+        <button id="start-quiz" disabled>Start Quiz</button>
         <div id="error-message" style="color: red;"></div>
         <div id="loading" class="loading-spinner" style="display: none;">Loading question banks...</div>
     </div>

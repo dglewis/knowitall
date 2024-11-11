@@ -1,5 +1,8 @@
 {
   "name": "PingOne Advanced Identity Cloud",
+  "description": "Test your knowledge of PingOne's advanced features",
+  "estimatedTime": "30 minutes",
+  "difficulty": "Advanced",
   "questions": [
     {
       "id": 1,
@@ -48,6 +51,18 @@
       ],
       "answer": [1, 2, 3, 4, 5],
       "type": "ordering"
+    },
+    {
+      "id": 7,
+      "question": "What is the purpose of the PingOne User Agent?",
+      "type": "radio",
+      "options": [
+        "To enable single sign-on across applications",
+        "To collect device information for risk analysis",
+        "To manage user sessions and cookies",
+        "To handle browser compatibility issues"
+      ],
+      "answer": "To collect device information for risk analysis"
     }
   ]
 }

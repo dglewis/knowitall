@@ -1,10 +1,8 @@
 let questions = [];
 let currentQuestionIndex = 0;
-let flaggedQuestions = new Set();
-let score = 0;
-let answered = false;
 let currentQuestionAnswered = false;
-let draggedItem = null;
+let flaggedQuestions = new Set();
+let questionAnswers = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     // Add menu button handler first
@@ -17,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (bank) {
         fetchQuestions(bank);
     }
+
+    // Event Listeners
     document.getElementById('next-btn').addEventListener('click', showNextQuestion);
     document.getElementById('prev-btn').addEventListener('click', showPreviousQuestion);
-    document.getElementById('submit-btn').addEventListener('click', submitAnswer);
+    document.getElementById('submit-btn').addEventListener('click', handleSubmit);
     document.getElementById('flag-checkbox').addEventListener('change', (e) => {
         if (e.target.checked) {
             flaggedQuestions.add(currentQuestionIndex);
@@ -30,237 +30,276 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     document.getElementById('review-btn').addEventListener('click', showFlaggedScreen);
     document.getElementById('back-btn').addEventListener('click', backToQuiz);
-    document.getElementById('start-quiz').addEventListener('click', () => {
-        const selectedBank = document.getElementById('question-bank').value;
-        fetch(`/questions/${selectedBank}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                questions = data.questions; // Access the questions array from the wrapper object
-                currentQuestionIndex = 0;
-                displayQuestion(questions[currentQuestionIndex]);
-                updateProgress();
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-            });
-    });
 });
 
-function fetchQuestionBanks() {
-    fetch('/question-banks')
-        .then(response => response.json())
-        .then(data => {
-            const questionBankSelect = document.getElementById('question-bank');
-            questionBankSelect.innerHTML = ''; // Clear existing options
-            data.forEach(bank => {
-                const option = document.createElement('option');
-                option.value = bank;
-                option.textContent = bank.replace('.json', ''); // Display without .json
-                questionBankSelect.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching question banks:', error);
-        });
+function handleSubmit() {
+    const optionsElement = document.getElementById('options');
+    let selectedAnswer;
+    const currentQuestion = questions[currentQuestionIndex];
+
+    switch(currentQuestion.type) {
+        case 'radio':
+            const selectedRadio = optionsElement.querySelector('input[type="radio"]:checked');
+            selectedAnswer = selectedRadio ? selectedRadio.value : null;
+            break;
+        case 'checkbox':
+            const selectedBoxes = optionsElement.querySelectorAll('input[type="checkbox"]:checked');
+            selectedAnswer = Array.from(selectedBoxes).map(box => box.value);
+            break;
+        case 'text':
+            const textInput = optionsElement.querySelector('input[type="text"]');
+            selectedAnswer = textInput ? textInput.value.trim() : null;
+            break;
+        case 'ordering':
+            const orderedItems = optionsElement.querySelectorAll('.ordering-item');
+            selectedAnswer = Array.from(orderedItems).map(item =>
+                parseInt(item.dataset.index) + 1
+            );
+            break;
+    }
+
+    if (!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)) {
+        document.getElementById('feedback').textContent = 'Please provide an answer';
+        return;
+    }
+
+    const correctAnswer = currentQuestion.answer;
+    const isCorrect = validateAnswer(selectedAnswer, correctAnswer, currentQuestion.type);
+
+    const feedbackElement = document.getElementById('feedback');
+    feedbackElement.textContent = isCorrect ? 'Correct!' : 'Incorrect. Try again!';
+    feedbackElement.style.color = isCorrect ? '#4CAF50' : '#f44336';
+
+    if (isCorrect) {
+        questionAnswers[currentQuestionIndex] = selectedAnswer;
+        const nextBtn = document.getElementById('next-btn');
+        nextBtn.classList.add('next-highlight');
+
+        // Create confetti after fuse effect
+        setTimeout(() => {
+            createConfetti(nextBtn);
+        }, 1000);
+
+        // Clean up animations when navigating away
+        nextBtn.addEventListener('click', () => {
+            nextBtn.classList.remove('next-highlight');
+            const confettiContainer = nextBtn.querySelector('.confetti-container');
+            if (confettiContainer) {
+                confettiContainer.remove();
+            }
+        }, { once: true });
+    }
+    currentQuestionAnswered = isCorrect;
+    updateNavigationState();
 }
 
 function fetchQuestions(bank) {
+    // Show loading state
+    document.getElementById('question').textContent = 'Loading questions...';
+    document.getElementById('options').innerHTML = '';
+
     fetch(`/questions/${bank}`)
         .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
+            if (!response.ok) throw new Error('Failed to fetch questions');
             return response.json();
         })
         .then(data => {
             questions = data.questions;
+            questionAnswers = new Array(questions.length).fill(null);
+            currentQuestionIndex = 0;
+            currentQuestionAnswered = false;
             displayQuestion(questions[currentQuestionIndex]);
-            updateProgress();
+            updateNavigationState();
         })
         .catch(error => {
-            console.error('Error fetching questions:', error);
-            document.getElementById('question').textContent = 'Failed to load questions.';
+            console.error('Error:', error);
+            document.getElementById('question').textContent = 'Error loading questions';
+            document.getElementById('options').innerHTML = '<div class="error">Please try refreshing the page</div>';
         });
 }
 
 function displayQuestion(question) {
-    const contentDiv = document.querySelector('.question-content');
+    // Update progress
+    document.getElementById('progress').textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+    document.getElementById('question').textContent = question.question;
+    document.getElementById('feedback').textContent = '';
+    document.getElementById('flag-checkbox').checked = flaggedQuestions.has(currentQuestionIndex);
 
-    // Fade out
-    contentDiv.style.opacity = 0;
+    const optionsElement = document.getElementById('options');
+    optionsElement.innerHTML = '';
 
-    setTimeout(() => {
-        // Update content
-        const questionElement = document.getElementById('question');
-        const optionsElement = document.getElementById('options');
-        const feedbackElement = document.getElementById('feedback');
+    const savedAnswer = questionAnswers[currentQuestionIndex];
+    currentQuestionAnswered = savedAnswer !== null;
 
-        questionElement.textContent = question.question;
-        optionsElement.innerHTML = ''; // Clear previous options
-        feedbackElement.textContent = ''; // Clear previous feedback
-        answered = false; // Reset answered state
-
-        if (question.type === 'radio') {
-            question.options.forEach(option => {
+    switch(question.type) {
+        case 'radio':
+            question.options.forEach((option, index) => {
                 const label = document.createElement('label');
                 const input = document.createElement('input');
                 input.type = 'radio';
-                input.name = 'option';
+                input.name = 'answer';
                 input.value = option;
+                input.addEventListener('change', updateNavigationState);
                 label.appendChild(input);
                 label.appendChild(document.createTextNode(option));
                 optionsElement.appendChild(label);
             });
-        } else if (question.type === 'checkbox') {
-            question.options.forEach(option => {
+            break;
+
+        case 'checkbox':
+            question.options.forEach((option, index) => {
                 const label = document.createElement('label');
                 const input = document.createElement('input');
                 input.type = 'checkbox';
                 input.value = option;
+                input.addEventListener('change', updateNavigationState);
                 label.appendChild(input);
                 label.appendChild(document.createTextNode(option));
                 optionsElement.appendChild(label);
             });
-        } else if (question.type === 'text') {
-            const input = document.createElement('input');
-            input.type = 'text';
-            input.placeholder = 'Your answer here';
-            optionsElement.appendChild(input);
-        } else if (question.type === 'ordering') {
-            const orderList = document.createElement('ul');
-            orderList.className = 'order-list';
-
-            question.options.forEach((option, index) => {
-                const listItem = document.createElement('li');
-                listItem.className = 'order-item';
-                listItem.draggable = true;
-                listItem.dataset.index = index;
-
-                const handle = document.createElement('div');
-                handle.className = 'drag-handle';
-                handle.innerHTML = '⋮⋮';
-
-                const text = document.createElement('span');
-                text.textContent = option;
-
-                listItem.appendChild(handle);
-                listItem.appendChild(text);
-                orderList.appendChild(listItem);
-            });
-
-            // Add drag and drop event listeners
-            orderList.addEventListener('dragstart', handleDragStart);
-            orderList.addEventListener('dragover', handleDragOver);
-            orderList.addEventListener('drop', handleDrop);
-
-            optionsElement.appendChild(orderList);
-        }
-
-        // Update flag checkbox state
-        document.getElementById('flag-checkbox').checked =
-            flaggedQuestions.has(currentQuestionIndex);
-
-        currentQuestionAnswered = false;
-        updateNavigationState();
-
-        // Fade in
-        contentDiv.style.opacity = 1;
-    }, 300);
-}
-
-function submitAnswer() {
-    const questionType = questions[currentQuestionIndex].type;
-    const optionsElement = document.getElementById('options');
-    let isCorrect = false;
-    let hasAnswer = false;
-
-    switch (questionType) {
-        case 'radio':
-            const selectedOption = optionsElement.querySelector('input[type="radio"]:checked');
-            if (!selectedOption) {
-                showFeedback('Please select an answer');
-                return;
-            }
-            hasAnswer = true;
-            isCorrect = selectedOption.value === questions[currentQuestionIndex].answer;
-            break;
-
-        case 'checkbox':
-            const selectedCheckboxes = optionsElement.querySelectorAll('input[type="checkbox"]:checked');
-            if (selectedCheckboxes.length === 0) {
-                showFeedback('Please select at least one answer');
-                return;
-            }
-            hasAnswer = true;
-            const selectedValues = Array.from(selectedCheckboxes).map(cb => cb.value);
-            const correctAnswers = questions[currentQuestionIndex].answer;
-            isCorrect =
-                selectedValues.length === correctAnswers.length &&
-                selectedValues.every(value => correctAnswers.includes(value));
             break;
 
         case 'text':
-            const textInput = optionsElement.querySelector('input[type="text"]');
-            if (!textInput || !textInput.value.trim()) {
-                showFeedback('Please enter an answer');
-                return;
-            }
-            hasAnswer = true;
-            isCorrect = textInput.value.trim().toLowerCase() === questions[currentQuestionIndex].answer.toLowerCase();
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'text-input';
+            input.addEventListener('input', updateNavigationState);
+            optionsElement.appendChild(input);
             break;
 
         case 'ordering':
-            const orderItems = optionsElement.querySelectorAll('.order-item');
-            if (!orderItems.length) {
-                showFeedback('Please order the items');
-                return;
-            }
-            hasAnswer = true;
-            const userOrder = Array.from(orderItems).map(item => item.dataset.index);
-            // Check if the order matches the expected sequence (0,1,2,3,4)
-            isCorrect = userOrder.every((item, index) => parseInt(item) === index);
+            // Clear existing content
+            optionsElement.innerHTML = '';
 
-            if (!isCorrect) {
-                showFeedback('Incorrect order. Try again!');
-                return;
-            }
+            // Shuffle options while ensuring it's not in the correct order
+            const shuffledOptions = shuffleArrayAvoidingOrder(question.options, question.answer);
+
+            // Add drag-and-drop handler
+            optionsElement.addEventListener('dragover', e => {
+                e.preventDefault();
+                const draggingItem = optionsElement.querySelector('.dragging');
+                if (!draggingItem) return;
+
+                const siblings = [...optionsElement.querySelectorAll('.ordering-item:not(.dragging)')];
+                const nextSibling = siblings.find(sibling => {
+                    const box = sibling.getBoundingClientRect();
+                    const offset = e.clientY - box.top - box.height / 2;
+                    return offset < 0;
+                });
+
+                if (nextSibling) {
+                    optionsElement.insertBefore(draggingItem, nextSibling);
+                } else {
+                    optionsElement.appendChild(draggingItem);
+                }
+            });
+
+            // Create and append the ordering items
+            shuffledOptions.forEach((option) => {
+                const div = document.createElement('div');
+                div.className = 'ordering-item';
+                div.draggable = true;
+                div.dataset.index = question.options.indexOf(option).toString();
+                div.textContent = option;
+
+                div.addEventListener('dragstart', () => {
+                    div.classList.add('dragging');
+                });
+
+                div.addEventListener('dragend', () => {
+                    div.classList.remove('dragging');
+                    updateNavigationState();
+                });
+
+                optionsElement.appendChild(div);
+            });
             break;
     }
 
-    if (hasAnswer) {
-        if (isCorrect) {
-            score++;
-            showFeedback('Correct!');
-            currentQuestionAnswered = true;
-            updateNavigationState();
-        } else {
-            showFeedback('Incorrect. Try again!');
+    // After creating all the options, restore saved answer if it exists
+    if (savedAnswer) {
+        switch(question.type) {
+            case 'radio':
+                const radio = optionsElement.querySelector(`input[value="${savedAnswer}"]`);
+                if (radio) radio.checked = true;
+                break;
+            case 'checkbox':
+                savedAnswer.forEach(value => {
+                    const checkbox = optionsElement.querySelector(`input[value="${value}"]`);
+                    if (checkbox) checkbox.checked = true;
+                });
+                break;
+            case 'text':
+                const textInput = optionsElement.querySelector('input[type="text"]');
+                if (textInput) textInput.value = savedAnswer;
+                break;
+            case 'ordering':
+                // Reorder items to match saved answer
+                const items = Array.from(optionsElement.querySelectorAll('.ordering-item'));
+                const orderedItems = savedAnswer.map(index =>
+                    items.find(item => parseInt(item.dataset.index) + 1 === index)
+                );
+                orderedItems.forEach(item => {
+                    if (item) optionsElement.appendChild(item);
+                });
+                break;
         }
     }
-}
 
-function showFeedback(message) {
-    const feedbackElement = document.getElementById('feedback');
-    feedbackElement.textContent = message;
+    updateNavigationState();
 }
 
 function updateProgress() {
     const progressElement = document.getElementById('progress');
     progressElement.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+    document.getElementById('review-btn').textContent = `Review Flagged (${flaggedQuestions.size})`;
+}
+
+function updateFlaggedCount() {
+    document.getElementById('review-btn').textContent = `Review Flagged (${flaggedQuestions.size})`;
 }
 
 function showNextQuestion() {
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex >= questions.length - 1) return;
+
+    const nextBtn = document.getElementById('next-btn');
+
+    // Clean up animations first
+    nextBtn.classList.remove('next-highlight');
+    const confettiContainer = nextBtn.querySelector('.confetti-container');
+    if (confettiContainer) {
+        confettiContainer.remove();
+    }
+
+    if (!currentQuestionAnswered) {
+        if (nextBtn.dataset.skipState === 'confirm') {
+            // User confirmed skip
+            flaggedQuestions.add(currentQuestionIndex);
+            updateFlaggedCount();
+            currentQuestionIndex++;
+            displayQuestion(questions[currentQuestionIndex]);
+            nextBtn.dataset.skipState = '';
+            nextBtn.textContent = 'Next';  // Reset button text
+        } else {
+            // First click - show confirmation
+            nextBtn.dataset.skipState = 'confirm';
+            updateNavigationState();
+
+            // Reset after 3 seconds if not clicked
+            setTimeout(() => {
+                if (nextBtn.dataset.skipState === 'confirm') {
+                    nextBtn.dataset.skipState = '';
+                    nextBtn.textContent = 'Next';  // Reset button text
+                    updateNavigationState();
+                }
+            }, 3000);
+        }
+    } else {
+        // Question is answered correctly, proceed normally
         currentQuestionIndex++;
         displayQuestion(questions[currentQuestionIndex]);
-        updateProgress();
-    } else {
-        document.getElementById('feedback').textContent = `Quiz complete! Final Score: ${score}`;
+        nextBtn.dataset.skipState = ''; // Reset skip state
+        nextBtn.textContent = 'Next';  // Reset button text
     }
 }
 
@@ -268,158 +307,126 @@ function showPreviousQuestion() {
     if (currentQuestionIndex > 0) {
         currentQuestionIndex--;
         displayQuestion(questions[currentQuestionIndex]);
-        updateProgress();
-    } else {
-        document.getElementById('feedback').textContent = 'This is the first question!';
     }
-}
-
-function flagCurrentQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    const feedbackElement = document.getElementById('feedback');
-    if (!flaggedQuestions.includes(currentQuestion)) {
-        flaggedQuestions.push(currentQuestion);
-        feedbackElement.textContent = 'Question flagged for review.';
-    } else {
-        feedbackElement.textContent = 'This question is already flagged.';
-    }
-    console.log('Flagged Questions:', flaggedQuestions);
-}
-
-function showFlaggedScreen() {
-    const flaggedScreen = document.getElementById('flagged-screen');
-    const flaggedList = document.getElementById('flagged-list');
-    const container = document.querySelector('.container');
-
-    flaggedList.innerHTML = ''; // Clear previous list
-
-    if (flaggedQuestions.size === 0) {
-        const listItem = document.createElement('li');
-        listItem.textContent = 'No flagged questions.';
-        flaggedList.appendChild(listItem);
-    } else {
-        flaggedQuestions.forEach((questionIndex) => {
-            const listItem = document.createElement('li');
-            listItem.textContent = `Question ${questionIndex + 1}`;
-            listItem.style.cursor = 'pointer';
-            listItem.addEventListener('click', (e) => {
-                e.stopPropagation(); // Prevent event bubbling
-                currentQuestionIndex = questionIndex;
-                displayQuestion(questions[currentQuestionIndex]);
-                updateProgress();
-                backToQuiz();
-            });
-            flaggedList.appendChild(listItem);
-        });
-    }
-
-    // Prevent clicks on the flagged screen from bubbling up
-    flaggedScreen.addEventListener('click', (e) => {
-        e.stopPropagation();
-    });
-
-    container.classList.add('hidden');
-    flaggedScreen.classList.remove('hidden');
-}
-
-function backToQuiz() {
-    const container = document.querySelector('.container');
-    const flaggedScreen = document.getElementById('flagged-screen');
-
-    container.classList.remove('hidden');
-    flaggedScreen.classList.add('hidden');
-}
-
-function reviewFlaggedQuestions() {
-    showFlaggedScreen();
-}
-
-function toggleFlagQuestion() {
-    const currentQuestion = questions[currentQuestionIndex];
-    const index = flaggedQuestions.indexOf(currentQuestion);
-    if (index > -1) {
-        flaggedQuestions.splice(index, 1);
-        console.log('Question unflagged:', currentQuestion);
-    } else {
-        flaggedQuestions.push(currentQuestion);
-        console.log('Question flagged:', currentQuestion);
-    }
-    console.log('Updated Flagged Questions:', flaggedQuestions);
 }
 
 function updateNavigationState() {
-    const submitBtn = document.getElementById('submit-btn');
     const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+    const submitBtn = document.getElementById('submit-btn');
 
-    if (currentQuestionAnswered) {
-        submitBtn.style.display = 'none';
-        nextBtn.style.display = 'block';
-    } else {
+    prevBtn.disabled = currentQuestionIndex <= 0;
+    nextBtn.disabled = currentQuestionIndex >= questions.length - 1;
+
+    // Check if any answer is selected
+    const currentQuestion = questions[currentQuestionIndex];
+    const optionsElement = document.getElementById('options');
+    let hasSelection = false;
+
+    switch(currentQuestion.type) {
+        case 'radio':
+            hasSelection = optionsElement.querySelector('input[type="radio"]:checked') !== null;
+            break;
+        case 'checkbox':
+            hasSelection = optionsElement.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+            break;
+        case 'text':
+            const textInput = optionsElement.querySelector('input[type="text"]');
+            hasSelection = textInput && textInput.value.trim() !== '';
+            break;
+        case 'ordering':
+            // For ordering questions, any arrangement should be considered a selection
+            // until it's been submitted and validated
+            hasSelection = true;
+            break;
+    }
+
+    if (!currentQuestionAnswered && hasSelection) {
+        // Show submit button when we have a selection but haven't validated yet
         submitBtn.style.display = 'block';
         nextBtn.style.display = 'none';
+    } else if (currentQuestionAnswered) {
+        // Show next button only after correct answer is submitted
+        submitBtn.style.display = 'none';
+        nextBtn.style.display = 'block';
+        nextBtn.disabled = currentQuestionIndex >= questions.length - 1;
+        nextBtn.textContent = 'Next';
+        nextBtn.dataset.skipState = '';
+    } else {
+        // Show skip option when no selection
+        submitBtn.style.display = 'none';
+        nextBtn.style.display = 'block';
+        nextBtn.textContent = nextBtn.dataset.skipState === 'confirm' ? 'Skip?' : 'Next';
     }
 }
 
-function handleSubmit() {
-    if (!validateAnswer()) {
-        showFeedback('Please provide an answer before proceeding');
-        return;
-    }
-
-    // Your existing submit logic here
-
-    currentQuestionAnswered = true;
-    updateNavigationState();
-}
-
-function validateAnswer() {
-    const questionType = currentQuestion.type;
-    const optionsElement = document.getElementById('options');
-
-    switch (questionType) {
+function validateAnswer(selected, correct, type) {
+    switch(type) {
         case 'radio':
-            return optionsElement.querySelector('input[type="radio"]:checked');
-        case 'checkbox':
-            return optionsElement.querySelector('input[type="checkbox"]:checked');
         case 'text':
-            return optionsElement.querySelector('input[type="text"]').value.trim() !== '';
+            return selected === correct;
+        case 'checkbox':
+            return JSON.stringify(selected.sort()) === JSON.stringify(correct.sort());
         case 'ordering':
-            const inputs = optionsElement.querySelectorAll('input[type="number"]');
-            return Array.from(inputs).every(input => input.value !== '');
+            // For ordering questions, we need to compare the actual order of items
+            // with the correct order, using 1-based indexing
+            return JSON.stringify(selected) === JSON.stringify(correct);
         default:
             return false;
     }
 }
 
-function updateFlaggedCount() {
-    const reviewBtn = document.getElementById('review-btn');
-    reviewBtn.textContent = `Review Flagged (${flaggedQuestions.size})`;
-}
+function createConfetti(button) {
+    const container = document.createElement('div');
+    container.className = 'confetti-container';
+    button.appendChild(container);
 
-function handleDragStart(e) {
-    draggedItem = e.target;
-    e.target.style.opacity = '0.5';
-}
+    // Create 20 confetti particles
+    for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
 
-function handleDragOver(e) {
-    e.preventDefault();
-    const target = e.target.closest('.order-item');
-    if (target && target !== draggedItem) {
-        const container = target.parentNode;
-        const items = [...container.children];
-        const draggedIndex = items.indexOf(draggedItem);
-        const targetIndex = items.indexOf(target);
+        // Random position within button
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = Math.random() * 100 + '%';
 
-        if (draggedIndex < targetIndex) {
-            target.after(draggedItem);
-        } else {
-            target.before(draggedItem);
-        }
+        // Random colors
+        confetti.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+        // Random animation delay
+        confetti.style.animation = `confetti 0.5s ease-out ${Math.random() * 0.5}s forwards`;
+
+        container.appendChild(confetti);
     }
+
+    // Clean up after animation
+    setTimeout(() => {
+        container.remove();
+        button.classList.remove('next-highlight');
+    }, 2500);
 }
 
-function handleDrop(e) {
-    e.preventDefault();
-    draggedItem.style.opacity = '1';
-    draggedItem = null;
+function shuffleArrayAvoidingOrder(array, correctOrder) {
+    let attempts = 0;
+    const maxAttempts = 100;
+    let shuffled = [...array];
+    let isCorrectOrder;
+
+    do {
+        // Shuffle the array
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        attempts++;
+
+        // Check if current shuffle matches correct order
+        const currentOrder = shuffled.map((_, index) => index + 1);
+        isCorrectOrder = JSON.stringify(currentOrder) === JSON.stringify(correctOrder);
+
+        // Break if we've tried too many times
+        if (attempts >= maxAttempts) break;
+    } while (isCorrectOrder);
+
+    return shuffled;
 }
