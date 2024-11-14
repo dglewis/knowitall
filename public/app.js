@@ -104,7 +104,8 @@ function fetchQuestions(bank) {
             return response.json();
         })
         .then(data => {
-            questions = data.questions;
+            // Shuffle the questions array before assigning
+            questions = shuffleQuestions(data.questions);
             questionAnswers = new Array(questions.length).fill(null);
             currentQuestionIndex = 0;
             currentQuestionAnswered = false;
@@ -438,6 +439,14 @@ function shuffleArrayAvoidingOrder(array, correctOrder) {
     } while (isCorrectOrder);
 
     return shuffled;
+}
+
+function shuffleQuestions(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 }
 
 function showCompletionScreen() {
