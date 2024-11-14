@@ -39,6 +39,27 @@
         <ul id="flagged-list"></ul>
         <button id="back-btn">Back to Quiz</button>
     </div>
+    <div id="completion-screen" class="hidden">
+        <h2>Quiz Complete!</h2>
+        <div class="completion-stats">
+            <div class="stat">
+                <span class="stat-label">Score:</span>
+                <span id="final-score">0%</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Questions Answered:</span>
+                <span id="questions-answered">0/0</span>
+            </div>
+            <div class="stat">
+                <span class="stat-label">Flagged Questions:</span>
+                <span id="final-flagged-count">0</span>
+            </div>
+        </div>
+        <div class="completion-actions">
+            <button id="review-flagged-btn">Review Flagged Questions</button>
+            <button id="finish-quiz-btn">Finish Quiz</button>
+        </div>
+    </div>
     <script src="/app.js"></script>
 </body>
 </html>

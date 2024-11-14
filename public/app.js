@@ -260,7 +260,10 @@ function updateFlaggedCount() {
 }
 
 function showNextQuestion() {
-    if (currentQuestionIndex >= questions.length - 1) return;
+    if (currentQuestionIndex >= questions.length - 1) {
+        showCompletionScreen();
+        return;
+    }
 
     const nextBtn = document.getElementById('next-btn');
 
@@ -316,7 +319,13 @@ function updateNavigationState() {
     const submitBtn = document.getElementById('submit-btn');
 
     prevBtn.disabled = currentQuestionIndex <= 0;
-    nextBtn.disabled = currentQuestionIndex >= questions.length - 1;
+
+    // Change next button text on final question
+    if (currentQuestionIndex === questions.length - 1) {
+        nextBtn.textContent = 'Complete Quiz';
+    } else {
+        nextBtn.textContent = nextBtn.dataset.skipState === 'confirm' ? 'Skip?' : 'Next';
+    }
 
     // Check if any answer is selected
     const currentQuestion = questions[currentQuestionIndex];
@@ -429,4 +438,66 @@ function shuffleArrayAvoidingOrder(array, correctOrder) {
     } while (isCorrectOrder);
 
     return shuffled;
+}
+
+function showCompletionScreen() {
+    const completionScreen = document.getElementById('completion-screen');
+    const container = document.querySelector('.container');
+
+    // Calculate final score
+    const answeredQuestions = questionAnswers.filter(answer => answer !== null).length;
+    const score = Math.round((answeredQuestions / questions.length) * 100);
+
+    // Update completion screen stats
+    document.getElementById('final-score').textContent = `${score}%`;
+    document.getElementById('questions-answered').textContent =
+        `${answeredQuestions}/${questions.length}`;
+    document.getElementById('final-flagged-count').textContent =
+        flaggedQuestions.size.toString();
+
+    // Show completion screen
+    completionScreen.classList.add('visible');
+    container.style.filter = 'blur(4px)';
+
+    // Add event listeners for completion actions
+    document.getElementById('review-flagged-btn').addEventListener('click', () => {
+        completionScreen.classList.remove('visible');
+        container.style.filter = '';
+        showFlaggedScreen();
+    });
+
+    document.getElementById('finish-quiz-btn').addEventListener('click', () => {
+        window.location.href = '/';
+    });
+}
+
+function showFlaggedScreen() {
+    const flaggedScreen = document.getElementById('flagged-screen');
+    const container = document.querySelector('.container');
+    const flaggedList = document.getElementById('flagged-list');
+
+    // Clear previous entries
+    flaggedList.innerHTML = '';
+
+    // Add each flagged question to the list
+    flaggedQuestions.forEach(index => {
+        const li = document.createElement('li');
+        li.textContent = `Question ${index + 1}: ${questions[index].question}`;
+        li.addEventListener('click', () => {
+            currentQuestionIndex = index;
+            displayQuestion(questions[currentQuestionIndex]);
+            backToQuiz();
+        });
+        flaggedList.appendChild(li);
+    });
+
+    flaggedScreen.classList.add('visible');
+    container.style.filter = 'blur(4px)';
+}
+
+function backToQuiz() {
+    const flaggedScreen = document.getElementById('flagged-screen');
+    const container = document.querySelector('.container');
+    flaggedScreen.classList.remove('visible');
+    container.style.filter = '';
 }
