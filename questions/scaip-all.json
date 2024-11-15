@@ -1,0 +1,1154 @@
+{
+  "name": "Saviynt Certified Advanced IGA Professional",
+  "questions": [
+    {
+      "id": 1,
+      "question": "In Saviynt’s Advanced Access Request System, which feature allows for customized access request forms?",
+      "options": [
+        "Dynamic Attributes",
+        "Workflow Configurations",
+        "Auto-Approve Workflows",
+        "SoD Checks"
+      ],
+      "answer": "Dynamic Attributes",
+      "type": "radio"
+    },
+    {
+      "id": 2,
+      "question": "Which workflow type in Saviynt supports parallel approval processes?",
+      "options": [
+        "Sequential Workflow",
+        "Parallel Workflow",
+        "Risk-Based Workflow",
+        "Custom Workflow"
+      ],
+      "answer": "Parallel Workflow",
+      "type": "radio"
+    },
+    {
+      "id": 3,
+      "question": "Which types of data are commonly managed by Saviynt’s REST connector for advanced integrations? (Select all that apply)",
+      "options": [
+        "User Profiles",
+        "Entitlement Data",
+        "Approval Workflows",
+        "Access Request History"
+      ],
+      "answer": ["User Profiles", "Entitlement Data"],
+      "type": "checkbox"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following capabilities does Saviynt provide to manage and mitigate SoD conflicts during access requests? (Select all that apply)",
+      "options": [
+        "Dynamic SoD Rule Application",
+        "Mitigating Control Assignment",
+        "Preventive SoD Policies",
+        "Emergency Access Overrides"
+      ],
+      "answer": [
+        "Dynamic SoD Rule Application",
+        "Mitigating Control Assignment",
+        "Preventive SoD Policies"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 5,
+      "question": "What is the purpose of Service Account Management in Saviynt?",
+      "options": [
+        "To manage user accounts and entitlements",
+        "To control access for privileged and non-human accounts",
+        "To automate workflows",
+        "To optimize role-based access"
+      ],
+      "answer": "To control access for privileged and non-human accounts",
+      "type": "radio"
+    },
+    {
+      "id": 6,
+      "question": "Fill in the blank: Saviynt’s _______ feature enables the detection and merging of duplicate identities in an organization’s identity ecosystem.",
+      "options": [],
+      "answer": "Duplicate Identity Management",
+      "type": "text"
+    },
+    {
+      "id": 7,
+      "question": "What is the primary benefit of integrating IGA with Privileged Access Management (PAM) in Saviynt?",
+      "options": [
+        "Enables enhanced reporting capabilities",
+        "Provides real-time insights into privileged access",
+        "Supports automated role creation",
+        "Simplifies SSO configurations"
+      ],
+      "answer": "Provides real-time insights into privileged access",
+      "type": "radio"
+    },
+    {
+      "id": 8,
+      "question": "What is the purpose of Peer Access Analytics within Saviynt?",
+      "options": [
+        "Detects SoD conflicts",
+        "Identifies access recommendations based on peer behavior",
+        "Manages access requests",
+        "Analyzes user login activity"
+      ],
+      "answer": "Identifies access recommendations based on peer behavior",
+      "type": "radio"
+    },
+    {
+      "id": 9,
+      "question": "Which of the following tasks can be performed using Saviynt APIs? (Select all that apply)",
+      "options": [
+        "Access Request Creation",
+        "Workflow Deployment",
+        "Identity Synchronization",
+        "SoD Rule Definition"
+      ],
+      "answer": ["Access Request Creation", "Identity Synchronization"],
+      "type": "checkbox"
+    },
+    {
+      "id": 10,
+      "question": "What is the role of Role Mining in Saviynt’s advanced identity intelligence?",
+      "options": [
+        "To detect SoD conflicts",
+        "To identify suitable roles based on user entitlements",
+        "To manage API integrations",
+        "To analyze data access behavior"
+      ],
+      "answer": "To identify suitable roles based on user entitlements",
+      "type": "radio"
+    },
+    {
+      "id": 11,
+      "question": "What is the maximum number of users that can be added to a single Bulk Request in Saviynt?",
+      "options": ["100", "500", "1000", "Unlimited"],
+      "answer": "1000",
+      "type": "radio"
+    },
+    {
+      "id": 12,
+      "question": "Order the following steps for configuring SAML-based SSO in Saviynt:",
+      "options": [
+        "Configure IdP Settings",
+        "Upload IdP metadata",
+        "Define SP configurations in EIC",
+        "Test SSO login with IdP"
+      ],
+      "answer": [2, 3, 1, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 13,
+      "question": "Which fields are mandatory for creating a new Service Account in Saviynt? (Select all that apply)",
+      "options": [
+        "Account Owner",
+        "Password Policy",
+        "Service Account Type",
+        "Expiration Date"
+      ],
+      "answer": ["Account Owner", "Service Account Type"],
+      "type": "checkbox"
+    },
+    {
+      "id": 14,
+      "question": "In Saviynt, how are entitlement owners notified during a certification campaign?",
+      "options": [
+        "Via Automated Email",
+        "Through Mobile Push Notifications",
+        "Direct Integration with Microsoft Teams",
+        "Notifications are not sent automatically"
+      ],
+      "answer": "Via Automated Email",
+      "type": "radio"
+    },
+    {
+      "id": 15,
+      "question": "Which of the following connectors supports reconciliation and provisioning in Saviynt? (Select all that apply)",
+      "options": ["Active Directory", "REST API", "LDAP", "SAML"],
+      "answer": ["Active Directory", "REST API", "LDAP"],
+      "type": "checkbox"
+    },
+    {
+      "id": 16,
+      "question": "Fill in the blank: The _______ feature in Saviynt allows automated role assignment based on user attributes.",
+      "options": [],
+      "answer": "Dynamic Attribute-Based Roles",
+      "type": "text"
+    },
+    {
+      "id": 17,
+      "question": "What is the primary advantage of integrating ServiceNow with Saviynt?",
+      "options": [
+        "Automatic ticket creation for access approvals",
+        "Real-time sync of HR data",
+        "SoD checks during incident creation",
+        "API throttling management"
+      ],
+      "answer": "Automatic ticket creation for access approvals",
+      "type": "radio"
+    },
+    {
+      "id": 18,
+      "question": "What are the different states of an Access Request lifecycle in Saviynt? (Select all that apply)",
+      "options": ["Pending", "Fulfilled", "Rejected", "Cancelled"],
+      "answer": ["Pending", "Fulfilled", "Rejected", "Cancelled"],
+      "type": "checkbox"
+    },
+    {
+      "id": 19,
+      "question": "What feature does Saviynt provide to manage credentials for non-human entities such as bots and service accounts?",
+      "options": [
+        "Privileged Identity Management",
+        "Just-in-Time Access",
+        "Credential Vaulting",
+        "Access Monitoring"
+      ],
+      "answer": "Credential Vaulting",
+      "type": "radio"
+    },
+    {
+      "id": 20,
+      "question": "Which is NOT a valid use case for the Saviynt REST connector?",
+      "options": [
+        "Reconcile Entitlement Data",
+        "Perform SoD Analysis",
+        "Provision User Access",
+        "Deactivate Accounts"
+      ],
+      "answer": "Perform SoD Analysis",
+      "type": "radio"
+    },
+    {
+      "id": 21,
+      "question": "What component is essential for ensuring proper SoD violation checks during an access request workflow?",
+      "options": [
+        "Risk Scoring Engine",
+        "Policy Management Module",
+        "Mitigating Controls",
+        "Approval Notifications"
+      ],
+      "answer": "Policy Management Module",
+      "type": "radio"
+    },
+    {
+      "id": 22,
+      "question": "Which is the best approach to manage emergency access scenarios in Saviynt?",
+      "options": [
+        "Create temporary roles with elevated privileges",
+        "Modify existing user roles to provide access",
+        "Utilize Emergency Role Request feature",
+        "Assign entitlements directly without approvals"
+      ],
+      "answer": "Utilize Emergency Role Request feature",
+      "type": "radio"
+    },
+    {
+      "id": 23,
+      "question": "What are the key prerequisites for configuring SAML-based SSO with Saviynt? (Select all that apply)",
+      "options": [
+        "An IdP supporting SAML 2.0",
+        "Metadata files from the IdP",
+        "Service Account credentials",
+        "Saviynt application URL"
+      ],
+      "answer": [
+        "An IdP supporting SAML 2.0",
+        "Metadata files from the IdP",
+        "Saviynt application URL"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 24,
+      "question": "Order the following steps for configuring a Bulk Request for multiple users in Saviynt:",
+      "options": [
+        "Enable Bulk Request",
+        "Upload CSV file",
+        "Define Approval Workflow",
+        "Fulfill Request"
+      ],
+      "answer": [1, 3, 2, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 25,
+      "question": "In the context of Saviynt connectors, which statement is correct?",
+      "options": [
+        "All connectors support SoD analysis",
+        "REST connectors only allow reconciliation",
+        "Database connectors can support both reconciliation and provisioning",
+        "SAML connectors support provisioning"
+      ],
+      "answer": "Database connectors can support both reconciliation and provisioning",
+      "type": "radio"
+    },
+    {
+      "id": 26,
+      "question": "What is the purpose of Saviynt’s Identity Analytics in access review campaigns?",
+      "options": [
+        "To ensure compliance by providing data-driven access insights",
+        "To monitor user login behavior",
+        "To automate role assignments",
+        "To generate SoD policies"
+      ],
+      "answer": "To ensure compliance by providing data-driven access insights",
+      "type": "radio"
+    },
+    {
+      "id": 27,
+      "question": "Which API endpoint is used for creating new access requests in Saviynt?",
+      "options": [
+        "POST /api/v1/requests",
+        "PUT /api/v1/access",
+        "PATCH /api/v1/users",
+        "GET /api/v1/entitlements"
+      ],
+      "answer": "POST /api/v1/requests",
+      "type": "radio"
+    },
+    {
+      "id": 28,
+      "question": "Which feature allows approvers to analyze risks and SoD violations before approving a request?",
+      "options": [
+        "Risk Analysis Dashboard",
+        "Approval Workflow Configuration",
+        "Mitigation Workflow",
+        "Peer Analytics"
+      ],
+      "answer": "Risk Analysis Dashboard",
+      "type": "radio"
+    },
+    {
+      "id": 29,
+      "question": "Which attributes are critical for defining a Service Account request in Saviynt? (Select all that apply)",
+      "options": [
+        "Owner",
+        "Entitlement Type",
+        "Request Expiry",
+        "Linked Applications"
+      ],
+      "answer": ["Owner", "Entitlement Type", "Linked Applications"],
+      "type": "checkbox"
+    },
+    {
+      "id": 30,
+      "question": "Fill in the blank: Saviynt’s _______ module integrates with ServiceNow to manage IT tickets and access requests seamlessly.",
+      "options": [],
+      "answer": "EIC ServiceNow Integration",
+      "type": "text"
+    },
+    {
+      "id": 31,
+      "question": "Which of the following features are available in Saviynt's Certification Campaigns? (Select all that apply)",
+      "options": [
+        "Automated Revocation",
+        "Risk-based Reviews",
+        "Peer Access Analysis",
+        "Custom Notifications"
+      ],
+      "answer": [
+        "Automated Revocation",
+        "Risk-based Reviews",
+        "Peer Access Analysis",
+        "Custom Notifications"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 32,
+      "question": "Which Saviynt feature ensures that temporary elevated access is revoked after a defined period?",
+      "options": [
+        "Dynamic Attributes",
+        "Emergency Access Management",
+        "Time-Bound Entitlements",
+        "Role Lifecycle Automation"
+      ],
+      "answer": "Time-Bound Entitlements",
+      "type": "radio"
+    },
+    {
+      "id": 33,
+      "question": "What is the purpose of the Just-In-Time (JIT) Access feature in Saviynt?",
+      "options": [
+        "To ensure compliance with regulatory standards",
+        "To grant temporary access based on immediate business needs",
+        "To automate role mining for high-risk users",
+        "To revoke inactive user accounts automatically"
+      ],
+      "answer": "To grant temporary access based on immediate business needs",
+      "type": "radio"
+    },
+    {
+      "id": 34,
+      "question": "Order the following steps for onboarding a new connected application using a REST connector in Saviynt:",
+      "options": [
+        "Configure Security System",
+        "Create Connection",
+        "Validate Data Import",
+        "Define Entitlement Types"
+      ],
+      "answer": [1, 2, 4, 3],
+      "type": "ordering"
+    },
+    {
+      "id": 35,
+      "question": "Which role is responsible for reviewing SoD violations and implementing mitigating controls in Saviynt?",
+      "options": [
+        "Administrator",
+        "Compliance Manager",
+        "Entitlement Owner",
+        "Service Account Manager"
+      ],
+      "answer": "Compliance Manager",
+      "type": "radio"
+    },
+    {
+      "id": 36,
+      "question": "Which features are supported by the Saviynt REST API? (Select all that apply)",
+      "options": [
+        "Provisioning Entitlements",
+        "Reconciliation of Users",
+        "Dynamic Workflow Creation",
+        "Identity Synchronization"
+      ],
+      "answer": [
+        "Provisioning Entitlements",
+        "Reconciliation of Users",
+        "Identity Synchronization"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 37,
+      "question": "What is the primary purpose of Role Lifecycle Management in Saviynt?",
+      "options": [
+        "To manage role provisioning and deprovisioning",
+        "To create default workflows",
+        "To assign emergency roles to users",
+        "To manage SoD policies"
+      ],
+      "answer": "To manage role provisioning and deprovisioning",
+      "type": "radio"
+    },
+    {
+      "id": 38,
+      "question": "Fill in the blank: Saviynt’s _______ feature detects outlier behavior among users to identify unusual access patterns.",
+      "options": [],
+      "answer": "Anomaly Detection",
+      "type": "text"
+    },
+    {
+      "id": 39,
+      "question": "Which of the following is NOT a valid step in creating a certification campaign in Saviynt?",
+      "options": [
+        "Define Certification Type",
+        "Set Mitigation Workflow",
+        "Assign Certifiers",
+        "Execute Bulk Import"
+      ],
+      "answer": "Execute Bulk Import",
+      "type": "radio"
+    },
+    {
+      "id": 40,
+      "question": "What is the purpose of the Entitlement Owner Certification feature in Saviynt?",
+      "options": [
+        "To assign entitlements to specific users",
+        "To certify access to entitlements periodically",
+        "To manage certification workflows",
+        "To monitor access violations in real-time"
+      ],
+      "answer": "To certify access to entitlements periodically",
+      "type": "radio"
+    },
+    {
+      "id": 41,
+      "question": "What action does Saviynt take when duplicate identities are detected?",
+      "options": [
+        "Automatically merges identities without approval",
+        "Generates a report for manual review",
+        "Suspends all duplicate identities",
+        "Reassigns entitlements to a single identity"
+      ],
+      "answer": "Generates a report for manual review",
+      "type": "radio"
+    },
+    {
+      "id": 42,
+      "question": "Which Saviynt feature helps ensure least privilege by limiting access to only what is necessary for a user's role?",
+      "options": [
+        "Access Reviews",
+        "Dynamic Role Assignment",
+        "Time-Bound Entitlements",
+        "Zero-Trust Access Policies"
+      ],
+      "answer": "Zero-Trust Access Policies",
+      "type": "radio"
+    },
+    {
+      "id": 43,
+      "question": "In Saviynt, what is the primary purpose of Access Certifications?",
+      "options": [
+        "To provision user accounts",
+        "To validate user access rights for compliance",
+        "To automate role assignments",
+        "To identify inactive user accounts"
+      ],
+      "answer": "To validate user access rights for compliance",
+      "type": "radio"
+    },
+    {
+      "id": 44,
+      "question": "What is required to configure a connection for an external application in Saviynt?",
+      "options": [
+        "Service Account credentials",
+        "Entitlement definitions",
+        "Application API details",
+        "All of the above"
+      ],
+      "answer": "All of the above",
+      "type": "radio"
+    },
+    {
+      "id": 45,
+      "question": "Which step is NOT part of setting up an SoD policy in Saviynt?",
+      "options": [
+        "Define risk levels for policies",
+        "Configure API endpoints for external integrations",
+        "Assign mitigating controls",
+        "Test policy in a staging environment"
+      ],
+      "answer": "Configure API endpoints for external integrations",
+      "type": "radio"
+    },
+    {
+      "id": 46,
+      "question": "Which of the following describes how Saviynt integrates with ServiceNow?",
+      "options": [
+        "Allows ServiceNow to act as a user provisioning tool",
+        "Enables automated ticket creation for access requests",
+        "Replaces ServiceNow's incident management capabilities",
+        "Provides a direct entitlement assignment interface"
+      ],
+      "answer": "Enables automated ticket creation for access requests",
+      "type": "radio"
+    },
+    {
+      "id": 47,
+      "question": "What type of analytics does Saviynt use to recommend entitlements during a role mining process?",
+      "options": [
+        "Historical access patterns",
+        "Peer group analysis",
+        "Predictive risk scores",
+        "All of the above"
+      ],
+      "answer": "All of the above",
+      "type": "radio"
+    },
+    {
+      "id": 48,
+      "question": "Order the following steps for creating a REST connector in Saviynt:",
+      "options": [
+        "Define endpoint configurations",
+        "Create a security system",
+        "Map data attributes",
+        "Test the connection"
+      ],
+      "answer": [2, 1, 3, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 49,
+      "question": "What is the significance of Entitlement Owner Certification in Saviynt?",
+      "options": [
+        "To enforce role hierarchy",
+        "To validate access against business needs",
+        "To assign roles dynamically",
+        "To audit login behaviors"
+      ],
+      "answer": "To validate access against business needs",
+      "type": "radio"
+    },
+    {
+      "id": 50,
+      "question": "Fill in the blank: Saviynt's _______ feature evaluates risk scores based on user behaviors and access anomalies.",
+      "options": [],
+      "answer": "Identity Analytics",
+      "type": "text"
+    },
+    {
+      "id": 51,
+      "question": "Which Saviynt feature allows for real-time remediation of access-related risks?",
+      "options": [
+        "Dynamic Role Assignment",
+        "Identity Analytics",
+        "Access Certification",
+        "Anomaly Detection Engine"
+      ],
+      "answer": "Anomaly Detection Engine",
+      "type": "radio"
+    },
+    {
+      "id": 52,
+      "question": "What is a critical step when configuring SoD policies in Saviynt?",
+      "options": [
+        "Defining incompatible roles",
+        "Assigning emergency overrides",
+        "Enabling automated entitlement creation",
+        "Exporting all SoD violations to an external system"
+      ],
+      "answer": "Defining incompatible roles",
+      "type": "radio"
+    },
+    {
+      "id": 53,
+      "question": "Which of the following are required for creating a Service Account request in Saviynt? (Select all that apply)",
+      "options": [
+        "Owner Approval",
+        "Expiration Policy",
+        "Entitlement Assignment",
+        "Role Mining Analysis"
+      ],
+      "answer": [
+        "Owner Approval",
+        "Expiration Policy",
+        "Entitlement Assignment"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 54,
+      "question": "Which type of authentication does Saviynt Enterprise Identity Cloud (EIC) support? (Select all that apply)",
+      "options": ["SAML", "LDAP", "OAuth", "OIDC"],
+      "answer": ["SAML", "LDAP"],
+      "type": "checkbox"
+    },
+    {
+      "id": 55,
+      "question": "Order the following steps in configuring Access Certifications in Saviynt:",
+      "options": [
+        "Define scope of certification",
+        "Assign certifiers",
+        "Generate certification campaign",
+        "Review and validate campaign results"
+      ],
+      "answer": [1, 2, 3, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 56,
+      "question": "Which aspect of Saviynt's Role Mining feature aids in reducing excessive permissions?",
+      "options": [
+        "Dynamic Attribute Mapping",
+        "Peer Analysis",
+        "Risk-Based Assignment",
+        "Entitlement Aggregation"
+      ],
+      "answer": "Peer Analysis",
+      "type": "radio"
+    },
+    {
+      "id": 57,
+      "question": "What does Saviynt's Identity Analytics engine primarily analyze to identify risks? (Select all that apply)",
+      "options": [
+        "Access patterns",
+        "SoD violations",
+        "Login frequency",
+        "Historical entitlements"
+      ],
+      "answer": [
+        "Access patterns",
+        "SoD violations",
+        "Historical entitlements"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 58,
+      "question": "What is a key advantage of integrating Saviynt with external IdPs like Okta or Azure AD?",
+      "options": [
+        "Streamlined user authentication and SSO",
+        "Automated creation of SoD rules",
+        "Native entitlement assignments",
+        "Direct application role provisioning"
+      ],
+      "answer": "Streamlined user authentication and SSO",
+      "type": "radio"
+    },
+    {
+      "id": 59,
+      "question": "Fill in the blank: In Saviynt, _______ workflows enable the approval process to dynamically adapt based on user attributes.",
+      "options": [],
+      "answer": "Risk-Based",
+      "type": "text"
+    },
+    {
+      "id": 60,
+      "question": "What is the purpose of the Mitigating Control Assignment feature in Saviynt's SoD policies?",
+      "options": [
+        "To allow high-risk roles to bypass approval workflows",
+        "To enable temporary overrides for violations",
+        "To ensure compensating measures for identified risks",
+        "To dynamically assign roles to high-risk users"
+      ],
+      "answer": "To ensure compensating measures for identified risks",
+      "type": "radio"
+    },
+    {
+      "id": 61,
+      "question": "Which component in Saviynt handles automated access deprovisioning when roles or entitlements are removed?",
+      "options": [
+        "Access Revocation Engine",
+        "Role Lifecycle Management",
+        "Dynamic SoD Policies",
+        "Workflow Configuration Module"
+      ],
+      "answer": "Role Lifecycle Management",
+      "type": "radio"
+    },
+    {
+      "id": 62,
+      "question": "What is the main function of the Peer Access Analytics feature in Saviynt?",
+      "options": [
+        "Detecting SoD violations",
+        "Identifying over-provisioned users",
+        "Recommending entitlements based on similar users",
+        "Auditing user behavior patterns"
+      ],
+      "answer": "Recommending entitlements based on similar users",
+      "type": "radio"
+    },
+    {
+      "id": 63,
+      "question": "Which API endpoint in Saviynt is used for revoking user access?",
+      "options": [
+        "DELETE /api/v1/entitlements",
+        "POST /api/v1/revocation",
+        "PATCH /api/v1/users",
+        "PUT /api/v1/access"
+      ],
+      "answer": "POST /api/v1/revocation",
+      "type": "radio"
+    },
+    {
+      "id": 64,
+      "question": "Which advanced capability of Saviynt allows for monitoring privileged account activities across cloud environments?",
+      "options": [
+        "Just-in-Time Access",
+        "Cloud Privileged Access Management",
+        "Anomaly Detection Engine",
+        "Dynamic Attribute Provisioning"
+      ],
+      "answer": "Cloud Privileged Access Management",
+      "type": "radio"
+    },
+    {
+      "id": 65,
+      "question": "What is required to execute bulk role mining operations in Saviynt? (Select all that apply)",
+      "options": [
+        "Predefined Role Templates",
+        "Access Review Campaigns",
+        "Historical Entitlement Data",
+        "Peer Group Analysis"
+      ],
+      "answer": [
+        "Predefined Role Templates",
+        "Historical Entitlement Data",
+        "Peer Group Analysis"
+      ],
+      "type": "checkbox"
+    },
+    {
+      "id": 66,
+      "question": "Order the following steps for setting up an Entitlement Owner Certification campaign:",
+      "options": [
+        "Define campaign type",
+        "Assign certifiers",
+        "Set up notifications",
+        "Review certification results"
+      ],
+      "answer": [1, 2, 3, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 67,
+      "question": "What is the primary benefit of integrating Saviynt's Identity Analytics with external compliance systems?",
+      "options": [
+        "Automated creation of access certification campaigns",
+        "Enhanced SoD rule enforcement",
+        "Real-time reporting of access anomalies",
+        "Simplified entitlement assignments"
+      ],
+      "answer": "Real-time reporting of access anomalies",
+      "type": "radio"
+    },
+    {
+      "id": 68,
+      "question": "What functionality does Saviynt's Dynamic Attributes feature provide?",
+      "options": [
+        "Real-time risk scoring for user behavior",
+        "Attribute-based role assignment and form customization",
+        "Workflow automation for entitlement reviews",
+        "Time-based access provisioning"
+      ],
+      "answer": "Attribute-based role assignment and form customization",
+      "type": "radio"
+    },
+    {
+      "id": 69,
+      "question": "Fill in the blank: Saviynt integrates with _______ to provide just-in-time access provisioning based on access policies.",
+      "options": [],
+      "answer": "Cloud PAM",
+      "type": "text"
+    },
+    {
+      "id": 70,
+      "question": "Which of the following is NOT an advanced feature of Saviynt APIs?",
+      "options": [
+        "Creating new entitlements",
+        "Executing certification campaigns",
+        "Managing service accounts",
+        "Automating SoD conflict detection"
+      ],
+      "answer": "Executing certification campaigns",
+      "type": "radio"
+    },
+    {
+      "id": 71,
+      "question": "Which feature in Saviynt enables the automatic transfer of service account ownership upon user termination?",
+      "options": [
+        "Ownership Transfer Rules",
+        "Service Account Automation",
+        "Termination Workflow Engine",
+        "Role-Based Transfer Policies"
+      ],
+      "answer": "Ownership Transfer Rules",
+      "type": "radio"
+    },
+    {
+      "id": 72,
+      "question": "What is the purpose of the Control Center in Saviynt?",
+      "options": [
+        "To manage user workflows",
+        "To centralize policy monitoring and risk analysis",
+        "To define SoD policies",
+        "To automate API-based provisioning"
+      ],
+      "answer": "To centralize policy monitoring and risk analysis",
+      "type": "radio"
+    },
+    {
+      "id": 73,
+      "question": "Which fields must be included when creating a request for a new service account in Saviynt? (Select all that apply)",
+      "options": [
+        "Service Account Owner",
+        "Account Type",
+        "Risk Level",
+        "Expiration Date"
+      ],
+      "answer": ["Service Account Owner", "Account Type"],
+      "type": "checkbox"
+    },
+    {
+      "id": 74,
+      "question": "Order the following steps to configure an advanced SoD policy in Saviynt:",
+      "options": [
+        "Define incompatible roles",
+        "Set risk thresholds",
+        "Assign mitigation controls",
+        "Enable policy in production"
+      ],
+      "answer": [1, 2, 3, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 75,
+      "question": "What is a key capability of the REST API connector in Saviynt?",
+      "options": [
+        "Automated entitlement mining",
+        "Real-time access reconciliation",
+        "Managing SoD conflicts",
+        "Performing role reviews"
+      ],
+      "answer": "Real-time access reconciliation",
+      "type": "radio"
+    },
+    {
+      "id": 76,
+      "question": "Which component is used for validating anomalies detected in Saviynt's Identity Analytics?",
+      "options": [
+        "Control Center",
+        "Risk Analysis Dashboard",
+        "Anomaly Validation Tool",
+        "SoD Policy Engine"
+      ],
+      "answer": "Risk Analysis Dashboard",
+      "type": "radio"
+    },
+    {
+      "id": 77,
+      "question": "Which of the following roles in Saviynt is responsible for certifying access to high-risk entitlements?",
+      "options": [
+        "Entitlement Owner",
+        "Administrator",
+        "Compliance Manager",
+        "Risk Analyst"
+      ],
+      "answer": "Entitlement Owner",
+      "type": "radio"
+    },
+    {
+      "id": 78,
+      "question": "What is the purpose of the Just-In-Time (JIT) Access feature in Saviynt?",
+      "options": [
+        "Temporary access based on immediate need",
+        "Preemptive SoD violation detection",
+        "Real-time API integration",
+        "Access role automation"
+      ],
+      "answer": "Temporary access based on immediate need",
+      "type": "radio"
+    },
+    {
+      "id": 79,
+      "question": "Fill in the blank: The _______ engine in Saviynt enables automated provisioning based on role and entitlement changes.",
+      "options": [],
+      "answer": "Rule-Based Automation",
+      "type": "text"
+    },
+    {
+      "id": 80,
+      "question": "Which type of approval workflow supports risk-based access decisioning in Saviynt?",
+      "options": [
+        "Sequential Workflow",
+        "Dynamic Workflow",
+        "Parallel Workflow",
+        "Mitigation Workflow"
+      ],
+      "answer": "Dynamic Workflow",
+      "type": "radio"
+    },
+    {
+      "id": 81,
+      "question": "What type of access does the Emergency Role Request feature in Saviynt provide?",
+      "options": [
+        "Permanent elevated access for privileged accounts",
+        "Temporary elevated access during critical incidents",
+        "Access to all entitlements without restrictions",
+        "Privileged access with no expiration"
+      ],
+      "answer": "Temporary elevated access during critical incidents",
+      "type": "radio"
+    },
+    {
+      "id": 82,
+      "question": "Which API functionality in Saviynt is used to onboard new users programmatically?",
+      "options": [
+        "POST /api/v1/users",
+        "PUT /api/v1/entitlements",
+        "GET /api/v1/access",
+        "DELETE /api/v1/requests"
+      ],
+      "answer": "POST /api/v1/users",
+      "type": "radio"
+    },
+    {
+      "id": 83,
+      "question": "Which of the following connectors is primarily used for directory-based integrations in Saviynt?",
+      "options": ["LDAP", "REST", "SAML", "OAuth"],
+      "answer": "LDAP",
+      "type": "radio"
+    },
+    {
+      "id": 84,
+      "question": "What is the primary advantage of using Risk-Based Workflow in Saviynt?",
+      "options": [
+        "Simplifies entitlement creation",
+        "Enables adaptive approval processes based on risk",
+        "Automates SoD conflict detection",
+        "Enforces least privilege policies"
+      ],
+      "answer": "Enables adaptive approval processes based on risk",
+      "type": "radio"
+    },
+    {
+      "id": 85,
+      "question": "What is the purpose of Saviynt’s Role Mining feature?",
+      "options": [
+        "To analyze and create roles based on user entitlements",
+        "To certify access for high-risk roles",
+        "To reconcile user account data with directories",
+        "To automate the role assignment process"
+      ],
+      "answer": "To analyze and create roles based on user entitlements",
+      "type": "radio"
+    },
+    {
+      "id": 86,
+      "question": "Order the following steps for validating a certification campaign in Saviynt:",
+      "options": [
+        "Generate campaign",
+        "Notify certifiers",
+        "Review results",
+        "Apply revocations"
+      ],
+      "answer": [1, 2, 3, 4],
+      "type": "ordering"
+    },
+    {
+      "id": 87,
+      "question": "Which authentication protocol is supported by Saviynt for enabling Single Sign-On?",
+      "options": ["SAML 2.0", "OAuth 1.0", "Kerberos", "LDAP"],
+      "answer": "SAML 2.0",
+      "type": "radio"
+    },
+    {
+      "id": 88,
+      "question": "Fill in the blank: Saviynt’s _______ module provides enhanced insights into identity and access risks through AI-driven analytics.",
+      "options": [],
+      "answer": "Intelligence",
+      "type": "text"
+    },
+    {
+      "id": 89,
+      "question": "Which Saviynt module allows for scheduling and monitoring of batch jobs?",
+      "options": [
+        "Job Management",
+        "Access Review Campaigns",
+        "Service Account Module",
+        "Dynamic Workflow Scheduler"
+      ],
+      "answer": "Job Management",
+      "type": "radio"
+    },
+    {
+      "id": 90,
+      "question": "What type of report does Saviynt generate during Identity Analytics to help decision-making?",
+      "options": [
+        "SoD Violation Summary",
+        "Anomaly Detection Report",
+        "Role Utilization Metrics",
+        "Access History Report"
+      ],
+      "answer": "Anomaly Detection Report",
+      "type": "radio"
+    },
+    {
+      "id": 91,
+      "question": "Which Saviynt feature ensures compliance by automating access reviews for specific roles or entitlements?",
+      "options": [
+        "Role Lifecycle Management",
+        "Certification Campaigns",
+        "Dynamic Workflows",
+        "Policy-Based Access Control"
+      ],
+      "answer": "Certification Campaigns",
+      "type": "radio"
+    },
+    {
+      "id": 92,
+      "question": "Which key configuration is necessary for integrating Saviynt with a REST-supported application?",
+      "options": [
+        "API Endpoints and Credentials",
+        "Certificate Authority Validation",
+        "SAML Metadata Exchange",
+        "Dynamic Workflow Configuration"
+      ],
+      "answer": "API Endpoints and Credentials",
+      "type": "radio"
+    },
+    {
+      "id": 93,
+      "question": "What is a primary use case for Saviynt’s Mitigating Controls in SoD policies?",
+      "options": [
+        "To allow conflicting roles to coexist with compensating measures",
+        "To automatically approve high-risk access requests",
+        "To revoke inactive accounts",
+        "To assign roles dynamically based on behavior"
+      ],
+      "answer": "To allow conflicting roles to coexist with compensating measures",
+      "type": "radio"
+    },
+    {
+      "id": 94,
+      "question": "Which roles in Saviynt can create and manage access certification campaigns? (Select all that apply)",
+      "options": [
+        "Administrator",
+        "Entitlement Owner",
+        "Compliance Manager",
+        "Service Account Manager"
+      ],
+      "answer": ["Administrator", "Compliance Manager"],
+      "type": "checkbox"
+    },
+    {
+      "id": 95,
+      "question": "What feature of Saviynt APIs allows bulk user data updates?",
+      "options": [
+        "Batch Processing",
+        "Dynamic Workflow Deployment",
+        "Parallel Request Execution",
+        "REST Event Triggering"
+      ],
+      "answer": "Batch Processing",
+      "type": "radio"
+    },
+    {
+      "id": 96,
+      "question": "What is the primary advantage of Peer Access Analytics in Saviynt?",
+      "options": [
+        "Identifies entitlements based on peer behavior",
+        "Generates SoD rules dynamically",
+        "Automates certification campaigns",
+        "Reduces workflow processing time"
+      ],
+      "answer": "Identifies entitlements based on peer behavior",
+      "type": "radio"
+    },
+    {
+      "id": 97,
+      "question": "Fill in the blank: Saviynt’s _______ module integrates with ITSM platforms to automate incident and access management.",
+      "options": [],
+      "answer": "ServiceNow Integration",
+      "type": "text"
+    },
+    {
+      "id": 98,
+      "question": "Which Saviynt connector is recommended for managing Active Directory group memberships?",
+      "options": [
+        "REST Connector",
+        "LDAP Connector",
+        "Database Connector",
+        "OAuth Connector"
+      ],
+      "answer": "LDAP Connector",
+      "type": "radio"
+    },
+    {
+      "id": 99,
+      "question": "What is the primary purpose of the Risk Scoring Engine in Saviynt?",
+      "options": [
+        "To prioritize SoD violations",
+        "To calculate and assign risk levels for entitlements",
+        "To automate user provisioning",
+        "To analyze API utilization patterns"
+      ],
+      "answer": "To calculate and assign risk levels for entitlements",
+      "type": "radio"
+    },
+    {
+      "id": 100,
+      "question": "Which feature in Saviynt automates provisioning of access for high-volume scenarios?",
+      "options": [
+        "Bulk Request Processing",
+        "Dynamic Role Assignment",
+        "Just-in-Time Access",
+        "Entitlement Campaign Automation"
+      ],
+      "answer": "Bulk Request Processing",
+      "type": "radio"
+    }
+  ]
+}
