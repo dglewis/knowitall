@@ -4,6 +4,65 @@ let currentQuestionAnswered = false;
 let flaggedQuestions = new Set();
 let questionAnswers = [];
 
+function levenshteinDistance(str1, str2) {
+    const m = str1.length;
+    const n = str2.length;
+    const dp = Array(m + 1).fill().map(() => Array(n + 1).fill(0));
+
+    for (let i = 0; i <= m; i++) dp[i][0] = i;
+    for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+    for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+            if (str1[i - 1] === str2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1];
+            } else {
+                dp[i][j] = 1 + Math.min(
+                    dp[i - 1][j],     // deletion
+                    dp[i][j - 1],     // insertion
+                    dp[i - 1][j - 1]  // substitution
+                );
+            }
+        }
+    }
+    return dp[m][n];
+}
+
+function calculateSimilarity(str1, str2) {
+    const distance = levenshteinDistance(str1.toLowerCase(), str2.toLowerCase());
+    return 1 - (distance / Math.max(str1.length, str2.length));
+}
+
+function validateTextAnswer(userAnswer, correctAnswer, threshold = 0.8) {
+    // Normalize strings: remove spaces, dots, case sensitivity
+    const normalize = (str) => str.toLowerCase()
+        .replace(/\s+/g, '')  // Remove all whitespace
+        .replace(/\./g, '')   // Remove dots
+        .trim();
+
+    const normalizedUser = normalize(userAnswer);
+    const normalizedCorrect = normalize(correctAnswer);
+
+    // Early return for exact matches after normalization
+    if (normalizedUser === normalizedCorrect) {
+        return {
+            isCorrect: true,
+            similarity: 1,
+            userAnswer: userAnswer,
+            correctAnswer: correctAnswer
+        };
+    }
+
+    // Calculate similarity using Levenshtein
+    const similarity = calculateSimilarity(normalizedUser, normalizedCorrect);
+    return {
+        isCorrect: similarity >= threshold,
+        similarity: similarity,
+        userAnswer: userAnswer,
+        correctAnswer: correctAnswer
+    };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // Add menu button handler first
     document.getElementById('menu-btn').addEventListener('click', () => {
@@ -36,6 +95,7 @@ function handleSubmit() {
     const optionsElement = document.getElementById('options');
     let selectedAnswer;
     const currentQuestion = questions[currentQuestionIndex];
+    const feedbackElement = document.getElementById('feedback');
 
     switch(currentQuestion.type) {
         case 'radio':
@@ -59,19 +119,42 @@ function handleSubmit() {
     }
 
     if (!selectedAnswer || (Array.isArray(selectedAnswer) && selectedAnswer.length === 0)) {
-        document.getElementById('feedback').textContent = 'Please provide an answer';
+        feedbackElement.textContent = 'Please provide an answer';
         return;
     }
 
-    const correctAnswer = currentQuestion.answer;
-    const isCorrect = validateAnswer(selectedAnswer, correctAnswer, currentQuestion.type);
+    const result = validateAnswer(selectedAnswer, currentQuestion.answer, currentQuestion.type);
 
-    const feedbackElement = document.getElementById('feedback');
-    feedbackElement.textContent = isCorrect ? 'Correct!' : 'Incorrect. Try again!';
-    feedbackElement.style.color = isCorrect ? '#4CAF50' : '#f44336';
+    // Create feedback HTML
+    let feedbackHTML = '<div class="answer-feedback ';
 
-    if (isCorrect) {
+    if (currentQuestion.type === 'text') {
+        if (result.similarity === 1) {
+            feedbackHTML += 'correct">';
+            feedbackHTML += '<div>Perfect match!</div>';
+        } else if (result.isCorrect) {
+            feedbackHTML += 'close-match">';
+            feedbackHTML += `<div>Close enough! (${Math.round(result.similarity * 100)}% match)</div>`;
+        } else {
+            feedbackHTML += 'incorrect">';
+            feedbackHTML += '<div>Incorrect</div>';
+        }
+
+        feedbackHTML += '<div class="answer-comparison">';
+        feedbackHTML += `<div><span class="answer-label">Your answer:</span><br>${result.userAnswer}</div>`;
+        feedbackHTML += `<div><span class="answer-label">Correct answer:</span><br>${result.correctAnswer}</div>`;
+        feedbackHTML += '</div></div>';
+    } else {
+        feedbackHTML += `<div class="answer-feedback ${result.isCorrect ? 'correct' : 'incorrect'}">`;
+        feedbackHTML += `<div>${result.isCorrect ? 'Correct!' : 'Incorrect'}</div></div>`;
+    }
+
+    feedbackElement.innerHTML = feedbackHTML;
+
+    if (result.isCorrect) {
         questionAnswers[currentQuestionIndex] = selectedAnswer;
+        currentQuestionAnswered = true;
+
         const nextBtn = document.getElementById('next-btn');
         nextBtn.classList.add('next-highlight');
 
@@ -89,7 +172,7 @@ function handleSubmit() {
             }
         }, { once: true });
     }
-    currentQuestionAnswered = isCorrect;
+
     updateNavigationState();
 }
 
@@ -371,16 +454,31 @@ function updateNavigationState() {
 function validateAnswer(selected, correct, type) {
     switch(type) {
         case 'radio':
+            return {
+                isCorrect: selected === correct,
+                userAnswer: selected,
+                correctAnswer: correct
+            };
         case 'text':
-            return selected === correct;
+            return validateTextAnswer(selected, correct);
         case 'checkbox':
-            return JSON.stringify(selected.sort()) === JSON.stringify(correct.sort());
+            return {
+                isCorrect: JSON.stringify(selected.sort()) === JSON.stringify(correct.sort()),
+                userAnswer: selected,
+                correctAnswer: correct
+            };
         case 'ordering':
-            // For ordering questions, we need to compare the actual order of items
-            // with the correct order, using 1-based indexing
-            return JSON.stringify(selected) === JSON.stringify(correct);
+            return {
+                isCorrect: JSON.stringify(selected) === JSON.stringify(correct),
+                userAnswer: selected,
+                correctAnswer: correct
+            };
         default:
-            return false;
+            return {
+                isCorrect: false,
+                userAnswer: selected,
+                correctAnswer: correct
+            };
     }
 }
 
