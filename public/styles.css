@@ -546,3 +546,49 @@ h1:hover {
 .warm-glow {
     display: none;
 }
+
+.answer-feedback {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.answer-feedback.correct {
+    background-color: rgba(75, 181, 67, 0.1);
+    border: 1px solid #4BB543;
+}
+
+.answer-feedback.close-match {
+    background-color: rgba(255, 183, 77, 0.1);
+    border: 1px solid #FFB74D;
+}
+
+.answer-feedback.incorrect {
+    background-color: rgba(255, 77, 77, 0.1);
+    border: 1px solid #FF4D4D;
+}
+
+.answer-comparison {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.answer-comparison > div {
+    flex: 1;
+}
+
+.answer-label {
+    font-weight: bold;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.similarity-score {
+    font-size: 0.8em;
+    color: #666;
+    font-style: italic;
+}
