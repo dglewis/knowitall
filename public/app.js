@@ -328,42 +328,40 @@ function updateNavigationState() {
         nextBtn.textContent = nextBtn.dataset.skipState === 'confirm' ? 'Skip?' : 'Next';
     }
 
-    // Check if any answer is selected
     const currentQuestion = questions[currentQuestionIndex];
     const optionsElement = document.getElementById('options');
-    let hasSelection = false;
+    let hasValidSelection = false;
 
+    // Validate selection based on question type
     switch(currentQuestion.type) {
         case 'radio':
-            hasSelection = optionsElement.querySelector('input[type="radio"]:checked') !== null;
+            hasValidSelection = optionsElement.querySelector('input[type="radio"]:checked') !== null;
             break;
         case 'checkbox':
-            hasSelection = optionsElement.querySelectorAll('input[type="checkbox"]:checked').length > 0;
+            const checkedBoxes = optionsElement.querySelectorAll('input[type="checkbox"]:checked');
+            hasValidSelection = checkedBoxes.length > 0 && checkedBoxes.length <= currentQuestion.answer.length;
             break;
         case 'text':
             const textInput = optionsElement.querySelector('input[type="text"]');
-            hasSelection = textInput && textInput.value.trim() !== '';
+            hasValidSelection = textInput && textInput.value.trim() !== '';
             break;
         case 'ordering':
-            // For ordering questions, any arrangement should be considered a selection
-            // until it's been submitted and validated
-            hasSelection = true;
+            const orderedItems = optionsElement.querySelectorAll('.ordering-item');
+            hasValidSelection = orderedItems.length === currentQuestion.options.length;
             break;
     }
 
-    if (!currentQuestionAnswered && hasSelection) {
-        // Show submit button when we have a selection but haven't validated yet
+    if (!currentQuestionAnswered && hasValidSelection) {
         submitBtn.style.display = 'block';
         nextBtn.style.display = 'none';
     } else if (currentQuestionAnswered) {
-        // Show next button only after correct answer is submitted
         submitBtn.style.display = 'none';
         nextBtn.style.display = 'block';
-        nextBtn.disabled = currentQuestionIndex >= questions.length - 1;
-        nextBtn.textContent = 'Next';
+        // Only disable next button if we're on last question AND it's not answered
+        nextBtn.disabled = currentQuestionIndex >= questions.length - 1 && !currentQuestionAnswered;
+        nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'Complete Quiz' : 'Next';
         nextBtn.dataset.skipState = '';
     } else {
-        // Show skip option when no selection
         submitBtn.style.display = 'none';
         nextBtn.style.display = 'block';
         nextBtn.textContent = nextBtn.dataset.skipState === 'confirm' ? 'Skip?' : 'Next';
