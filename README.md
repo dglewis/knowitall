@@ -12,33 +12,58 @@ KnowItAll Quiz is a simple quiz engine built with Node.js and Express. It serves
 
 ## Installation
 
-1. Clone the repository:
+### Option 1: Docker (Recommended)
 
+1. Install Docker and Docker Compose
+2. Clone or download this repository
+3. Open terminal in project directory
+4. Run:
    ```bash
-   git clone https://github.com/dglewis/knowitall.git
+   docker-compose up
    ```
+5. Open browser to http://localhost:3000
 
-2. Navigate to the project directory:
+#### Docker Operations Cheat Sheet
+```bash
+# Start the application
+docker-compose up
 
-   ```bash
-   cd knowitall
-   ```
+# Run in background
+docker-compose up -d
 
-3. Install the dependencies:
+# View logs
+docker logs knowitall_quiz_1
 
+# Access container shell
+docker exec -it knowitall_quiz_1 bash
+
+# Stop application
+docker-compose down
+
+# Rebuild after changes
+docker-compose up --build
+```
+
+### Option 2: Standalone Executable
+
+1. Download the appropriate executable for your system:
+   - Windows: knowitall-win.exe
+   - macOS: knowitall-macos
+   - Linux: knowitall-linux
+2. Double-click to run
+3. Open browser to http://localhost:3000
+
+### Option 3: Manual Installation
+
+1. Install Node.js 18 or later
+2. Clone or download this repository
+3. Open terminal in project directory
+4. Run:
    ```bash
    npm install
-   ```
-
-## Usage
-
-1. Start the server:
-
-   ```bash
    npm start
    ```
-
-2. Open your browser and go to `http://localhost:3000` to start the quiz.
+5. Open browser to http://localhost:3000
 
 ## Development
 

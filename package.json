@@ -1,12 +1,14 @@
 {
   "name": "knowitall",
   "version": "1.0.0",
+  "private": true,
   "description": "Quiz Engine",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg . --targets node18-win-x64,node18-linux-x64,node18-macos-x64 --output dist/knowitall"
   },
   "keywords": [
     "quiz",
@@ -19,6 +21,16 @@
     "express": "^4.21.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "pkg": "^5.8.1",
+    "archiver": "^5.3.1"
+  },
+  "bin": "index.js",
+  "pkg": {
+    "assets": [
+      "public/**/*",
+      "views/**/*",
+      "questions/**/*"
+    ]
   }
 }
