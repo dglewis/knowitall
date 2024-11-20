@@ -305,6 +305,8 @@ Before releasing, verify all distribution methods:
    npm start
    ```
 
+Note: Always run `npm run dist` from the project root directory where package.json is located.
+
 4. **Manual Installation**
    ```bash
    # Fresh clone and install
