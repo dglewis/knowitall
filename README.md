@@ -263,3 +263,59 @@ Note:
 - Test all distribution methods before PR
 - Follow existing code style
 - Update documentation for new features
+
+### Testing Distribution Methods
+
+Before releasing, verify all distribution methods:
+
+1. **Docker Distribution**
+   ```bash
+   # Clean test
+   docker-compose down
+   docker system prune -f
+   docker-compose up --build
+   ```
+
+2. **Executable Distribution**
+   ```bash
+   # Clean and rebuild
+   rm -rf dist/
+   npm run build
+
+   # Test each platform
+   ./dist/knowitall-macos  # macOS
+   ./dist/knowitall-linux  # Linux
+   ./dist/knowitall-win.exe  # Windows
+   ```
+
+3. **ZIP Distribution**
+   ```bash
+   # Clean start
+   rm -rf dist/ test-dist/
+
+   # Install dependencies and create distribution
+   npm install
+   npm run dist
+
+   # Test in new directory
+   mkdir test-dist
+   cd test-dist
+   unzip ../dist/knowitall.zip
+   npm install
+   npm start
+   ```
+
+4. **Manual Installation**
+   ```bash
+   # Fresh clone and install
+   git clone <repository-url> test-install
+   cd test-install
+   npm install
+   npm start
+   ```
+
+Verify for each method:
+- Application starts successfully
+- Question banks are accessible
+- All question types work
+- UI elements render correctly
