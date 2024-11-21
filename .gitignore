@@ -1,6 +1,11 @@
 # Node.js
 node_modules/
 
+# Distribution / builds
+dist/
+*.exe
+knowitall-*
+
 # Logs
 *.log
 
