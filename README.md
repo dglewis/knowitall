@@ -23,6 +23,15 @@ KnowItAll Quiz is a simple quiz engine built with Node.js and Express. It serves
    ```
 5. Open browser to http://localhost:3000
 
+#### Environment Variables
+- `PORT`: Set custom port (default: 3000)
+- `MAX_PORT_ATTEMPTS`: Maximum number of alternative ports to try if default is in use (default: 10)
+
+Example with custom port:
+```bash
+PORT=8080 docker-compose up
+```
+
 #### Docker Operations Cheat Sheet
 ```bash
 # Start the application
@@ -104,7 +113,19 @@ npm install
 
 # Start development server (with auto-reload)
 npm run dev
+
+# Start with custom port
+PORT=8080 npm start
+
+# Start with custom port range attempts
+PORT=8080 MAX_PORT_ATTEMPTS=5 npm start
 ```
+
+### Port Configuration
+The application will automatically:
+- Try to use the specified port (default: 3000)
+- If the port is in use, it will try subsequent ports up to MAX_PORT_ATTEMPTS
+- Display the actual port being used in the console output
 
 ### Building Distributions
 
