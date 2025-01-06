@@ -63,7 +63,17 @@ app.get('/question-banks', (req, res) => {
         if (err) {
             return res.status(500).send('Error reading question banks');
         }
-        const questionBanks = files.filter(file => file.endsWith('.json'));
+        const questionBanks = files
+            .filter(file => file.endsWith('.json'))
+            .filter(filename => {
+                try {
+                    const filePath = path.join(questionsDir, filename);
+                    JSON.parse(fs.readFileSync(filePath, 'utf8'));
+                    return true;
+                } catch {
+                    return false;
+                }
+            });
         res.json(questionBanks);
     });
 });
