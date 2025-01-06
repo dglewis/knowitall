@@ -146,7 +146,30 @@ function handleSubmit() {
         feedbackHTML += '</div></div>';
     } else {
         feedbackHTML += `<div class="answer-feedback ${result.isCorrect ? 'correct' : 'incorrect'}">`;
-        feedbackHTML += `<div>${result.isCorrect ? 'Correct!' : 'Incorrect'}</div></div>`;
+        feedbackHTML += `<div>${result.isCorrect ? 'Correct!' : 'Incorrect'}</div>`;
+
+        // Add explanation if available
+        if (currentQuestion.explanation) {
+            feedbackHTML += `
+                <div class="explanation">
+                    <h4>Explanation:</h4>
+                    <p>${currentQuestion.explanation}</p>
+                </div>`;
+        }
+
+        // Add reference if available
+        if (currentQuestion.reference) {
+            feedbackHTML += `
+                <div class="reference">
+                    <h4>Reference:</h4>
+                    <p>${currentQuestion.reference.document}</p>
+                    ${currentQuestion.reference.url ?
+                        `<a href="${currentQuestion.reference.url}" target="_blank">View Documentation</a>` :
+                        ''}
+                </div>`;
+        }
+
+        feedbackHTML += '</div>';
     }
 
     feedbackElement.innerHTML = feedbackHTML;
@@ -328,6 +351,34 @@ function displayQuestion(question) {
                 });
                 break;
         }
+    }
+
+    // Add hint button if explanation exists
+    const questionContainer = document.getElementById('question');
+    if (question.explanation) {
+        const hintButton = document.createElement('button');
+        hintButton.id = 'hint-btn';
+        hintButton.className = 'hint-button';
+        hintButton.innerHTML = `
+            <svg width="20" height="20" viewBox="0 0 20 20">
+                <path fill="currentColor" d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm1 15H9v-2h2v2zm0-4H9V5h2v6z"/>
+            </svg>
+        `;
+        hintButton.title = "Show hint";
+        questionContainer.appendChild(hintButton);
+
+        // Add hint button click handler
+        hintButton.addEventListener('click', () => {
+            const feedbackElement = document.getElementById('feedback');
+            feedbackElement.innerHTML = `
+                <div class="answer-feedback hint">
+                    <div class="explanation">
+                        <h4>Hint:</h4>
+                        <p>${question.explanation}</p>
+                    </div>
+                </div>
+            `;
+        });
     }
 
     updateNavigationState();
@@ -606,3 +657,24 @@ function backToQuiz() {
     flaggedScreen.classList.remove('visible');
     container.style.filter = '';
 }
+
+function validateQuestionBank(questions) {
+    return questions.map(q => ({
+        ...q,
+        // Ensure explanation and reference are undefined if not present
+        explanation: q.explanation || undefined,
+        reference: q.reference && Object.keys(q.reference).length > 0 ?
+            q.reference : undefined
+    }));
+}
+
+// Use this when loading questions
+fetch('/api/questions')
+    .then(response => response.json())
+    .then(data => {
+        questions = validateQuestionBank(data);
+        // ... rest of initialization code ...
+    })
+    .catch(error => {
+        console.error('Error loading questions:', error);
+    });

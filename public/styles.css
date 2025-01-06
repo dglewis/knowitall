@@ -592,3 +592,71 @@ h1:hover {
     color: #666;
     font-style: italic;
 }
+
+.explanation,
+.reference {
+    display: none;
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+/* Only show if content exists */
+.explanation:not(:empty) {
+    display: block;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.reference:not(:empty) {
+    display: block;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.hint-button {
+    background: none;
+    border: none;
+    color: rgba(97, 218, 251, 0.8);
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hint-button:hover {
+    background: rgba(97, 218, 251, 0.1);
+    transform: scale(1.1);
+}
+
+.answer-feedback.hint {
+    background: rgba(97, 218, 251, 0.1);
+    border: 1px solid rgba(97, 218, 251, 0.3);
+}
+
+.explanation h4,
+.reference h4 {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0 0 8px 0;
+}
+
+.explanation p,
+.reference p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.reference a {
+    display: inline-block;
+    margin-top: 8px;
+    color: #61dafb;
+    text-decoration: none;
+}
+
+.reference a:hover {
+    text-decoration: underline;
+}

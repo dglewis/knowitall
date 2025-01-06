@@ -9,7 +9,12 @@
       "question": "What protocol is used for federated authentication in PingOne?",
       "options": ["SAML", "OAuth 2.0", "OIDC", "LDAP"],
       "answer": "OIDC",
-      "type": "radio"
+      "type": "radio",
+      "explanation": "OIDC (OpenID Connect) is the primary protocol used in PingOne for federated authentication as it provides a modern, REST-based protocol built on OAuth 2.0.",
+      "reference": {
+        "document": "PingOne Documentation",
+        "url": "https://docs.pingidentity.com/bundle/pingone/page/als1564020488261.html"
+      }
     },
     {
       "id": 2,
