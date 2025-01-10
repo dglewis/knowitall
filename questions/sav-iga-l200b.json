@@ -1,0 +1,811 @@
+{
+    "name": "(v3) Saviynt Certified Advanced IGA Professional",
+    "questions": [
+      {
+        "id": 1,
+        "question": "In the process of setting up single sign on using SAML 2.0, an external IdP metadata file is",
+        "options": [".xls", ".xml", ".cert", ".html"],
+        "answer": ".xml",
+        "type": "radio",
+        "explanation": "SAML 2.0 metadata is always provided in XML format. The metadata file contains essential configuration information such as entity IDs, endpoints (URLs), certificates, and other SAML-specific settings needed for establishing the trust relationship between the Service Provider (SP) and Identity Provider (IdP).",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - SSO Configuration Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v2022x/page/Content/Chapter06-EIC-Configurations/Configuring-SAML-Based-Single-Sign-On.htm#Step"
+        }
+      },
+      {
+        "id": 2,
+        "question": "Saviynt EIC can support multiple identity providers for single sign on",
+        "options": ["true", "false"],
+        "answer": "true",
+        "type": "radio",
+        "explanation": "Saviynt EIC supports the configuration of multiple Identity Providers (IdPs) for Single Sign-On (SSO). This allows users to authenticate through different identity sources, providing flexibility and accommodating various organizational structures or partner requirements.",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - SSO Configuration Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v2022x/page/Content/Chapter06-EIC-Configurations/Configuring-SAML-Based-Single-Sign-On.htm#MultipleIdPs"
+        }
+      },
+      {
+        "id": 3,
+        "question": "___ is always time-bound and can be requested only for a specific period",
+        "options": ["emergency access role"],
+        "answer": "emergency access role",
+        "type": "radio",
+        "explanation": "Emergency access roles are designed to grant elevated privileges for a limited time, typically in response to urgent situations. These roles are time-bound to ensure that access is revoked once the emergency is resolved, reducing the risk of unauthorized access.",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - Access Request Settings",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-AMS/page/Content/Chapter13-Access-Requests/ars-set-up-emrg-accs.htm"
+        }
+      },
+      {
+        "id": 4,
+        "question": "What configuration types are needed to set up an emergency access role request?",
+        "options": [
+          "Select a workflow under global configurations",
+          "All of the above",
+          "Select emergency access-related parameters in the role-level configurations",
+          "Select required feature access in SAV Role Configurations"
+        ],
+        "answer": "All of the above",
+        "type": "radio",
+        "explanation": "To set up an emergency access role request in Saviynt, the following configurations are necessary:\n- Workflow selection under global configurations: This defines the approval process for emergency access requests.\n- Role-level configuration of emergency access parameters: Role-specific settings ensure that only designated roles can be requested for emergency access.\n- Feature access in SAV Role Configurations: Required feature access must be enabled to support emergency role requests.\n\nThis comprehensive setup ensures that emergency access is managed properly with appropriate approvals and restrictions.",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - Access Request Settings",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-AMS/page/Content/Chapter13-Access-Requests/ars-set-up-emrg-accs.htm"
+        }
+      },
+      {
+        "id": 5,
+        "question": "Access request approval is not being assigned to the correct approver for a given endpoint. In this scenario, what configurations will you check?",
+        "options": [
+          "Verify the workflow attached to the corresponding Security System to ensure it is correctly configured",
+          "Verify if Delegate is configured for the intended approver",
+          "Verify the workflow attached to the corresponding endpoint to ensure it is correctly configured",
+          "Verify the requestor selected the correct approver while submitting the request"
+        ],
+        "answer": [
+          "Verify the workflow attached to the corresponding Security System to ensure it is correctly configured",
+          "Verify the workflow attached to the corresponding endpoint to ensure it is correctly configured"
+        ],
+        "type": "checkbox",
+        "explanation": "In Saviynt, workflows define how access requests are routed for approvals. If approvals are not being assigned correctly, the issue could lie in the workflow configuration at either the Security System level or the Endpoint level. The Security System workflow ensures that general access requests for connected systems follow the defined approval chain, while the Endpoint workflow handles specific application-level access requests. Misconfigured workflows at either level can result in requests being routed to the wrong approver or not being routed at all. Delegation and manual selection errors are less common causes in this context but should still be considered during troubleshooting.",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - Access Requests",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-AMS/page/Content/Chapter13-Access-Requests/Access-Requests.htm"
+        }
+      },
+      {
+        "id": 6,
+        "question": "Which of the following actions should be taken in EIC for effectively managing orphan accounts to mitigate security risks in your organization?",
+        "options": [
+          "Execute 'Detective Job' to identify and map orphan accounts",
+          "Disable all orphan accounts immediately without attempting to map them to valid users",
+          "Create a campaign to map orphan accounts to the users",
+          "Utilize Saviynt's out-of-the-box 'Map Orphan Accounts' action to associate orphan accounts with valid users or owners"
+        ],
+        "answer": "Utilize Saviynt's out-of-the-box 'Map Orphan Accounts' action to associate orphan accounts with valid users or owners",
+        "type": "radio",
+        "explanation": "Orphan accounts are accounts that exist without an associated valid user, posing significant security risks. To manage these effectively in Saviynt EIC, you should utilize the out-of-the-box 'Map Orphan Accounts' action. This feature allows you to associate orphan accounts with valid users or owners, ensuring proper account management and mitigating potential security vulnerabilities. Immediate disabling of orphan accounts without analysis is not recommended, as it may disrupt legitimate access.",
+        "reference": {
+          "document": "Saviynt Enterprise IGA Documentation - Managing Orphan Accounts",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter02-Identity-Repository/Managing-Orphan-Accounts.htm"
+        }
+      },
+      {
+        "id": 7,
+        "question": "Which of the following configurations are required to successfully raise access requests for multiple users?",
+        "options": [
+          "Select approval Workflow for Bulk Request in Security System",
+          "Select approval workflow for Bulk Request in the Endpoint",
+          "Select approval workflow for Bulk Request in global configuration",
+          "None of the above"
+        ],
+        "answer": "Select approval Workflow for Bulk Request in Security System",
+        "type": "radio",
+        "explanation": "To successfully raise access requests for multiple users in Saviynt's Enterprise Identity Cloud (EIC), it is essential to configure the approval workflow for bulk requests at the Security System level. This configuration ensures that bulk access requests are properly routed and managed according to the organization's approval processes. Configuring the workflow at the Endpoint or Global Configuration levels does not provide the necessary scope for handling bulk requests across multiple systems.",
+        "reference": {
+          "document": "Saviynt Enterprise Identity Cloud Administration Guide - Workflows",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-AMS/page/Content/Chapter12-Workflows/Workflows.htm"
+        }
+      },
+      {
+        "id": 8,
+        "question": "EIC Administrator wants to populate only the Entitlements which belong to the selected department (dynamic attribute) during access request. Assuming customproperty stores the department name in entitlements, where can the below query be configured in EIC?",
+        "options": [
+          "Global configuration",
+          "Access query in endpoint",
+          "Config for requestable entitlement in ARS",
+          "None of the above"
+        ],
+        "answer": "Access query in endpoint",
+        "type": "radio",
+        "explanation": "The correct configuration to dynamically filter entitlements during an access request is by using an access query in the endpoint. This approach ensures that only entitlements associated with the selected department (dynamic attribute) are displayed in the application request form. According to the use case 'Customize the application request form' in the Saviynt documentation, dynamic attributes and entitlement grouping are configured within the Endpoint Details and Entitlement Type tabs to control visibility and populate entitlements dynamically. Other options, such as global configuration or ARS settings, do not support context-specific queries for filtering entitlements during a request.",
+        "reference": {
+          "document": "Saviynt EIC Documentation - Implementing Access Requests for Applications and Endpoints",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter13-Access-Requests/ars-uc-impl-appl-ep.htm"
+        }
+      },
+      {
+        "id": 9,
+        "question": "If a change password request is created through the ARS page for a particular account from the tile 'reset the account password for others'. Which password policy will be applicable?",
+        "options": [
+          "Password policy set with scope as 'APPLICATION' assigned to the 'Policy Rule' in the security system",
+          "Password policy set with scope as 'APPLICATION' assigned to the 'Policy Rule' in the endpoint",
+          "Password policy set with scope as 'USER' assigned to the 'Policy Rule' in the security system",
+          "Password policy set from global configuration"
+        ],
+        "answer": "Password policy set with scope as 'USER' assigned to the 'Policy Rule' in the security system",
+        "type": "radio",
+        "explanation": "When a password change request is initiated through the ARS page for another user’s account using the tile 'reset the account password for others', the applicable password policy is determined by the policy assigned at the security system level. Specifically, when the password policy scope is set to 'USER' in the security system's policy rule, it governs password changes for user-centric actions. This approach ensures that the correct password criteria are applied when handling requests involving user accounts. The other options either involve application-level or global configurations, which are not prioritized in this case as the request is scoped to individual user accounts.",
+        "reference": {
+          "document": "Saviynt Enterprise Identity Cloud Administration Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter02-Identity-Repository/Assigning-Password-Policy-Security-System.htm"
+        }
+      },
+      {
+        "id": 10,
+        "question": "Choose the correct SQL query from the below options to populate an attribute with the logged-in user's Display Name:",
+        "options": [
+          "Select DISPLAYNAME as ID from Users u where u.userkey=${loggedInUser}",
+          "Select DISPLAYNAME as ID from Users u where u.userkey=${requestor}",
+          "Select DISPLAYNAME as ID from Users u where u.userkey=${user.id}",
+          "All of the above"
+        ],
+        "answer": "Select DISPLAYNAME as ID from Users u where u.userkey=${loggedInUser}",
+        "type": "radio",
+        "explanation": "The correct query uses ${loggedInUser}, which directly retrieves the Display Name of the currently logged-in user. ${requestor} is used in scenarios where a request is made on behalf of another user, but since the question explicitly mentions 'logged-in user', ${loggedInUser} is the appropriate variable to use.",
+        "reference": {
+          "document": "Saviynt EIC Administration Guide v24.x",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter13-Access-Requests/ars-mang-usr-set-relationships.htm"
+        }
+      },
+      {
+        "id": 11,
+        "question": "The helpdesk has set a new password for the user who called in for password reset assistance. Choose the correct configuration to share the password with the calling user.",
+        "options": [
+          "Configure an email template in Change Password Notification configurations",
+          "Setup User Update Rule and configure an email template",
+          "Configure an email template in the Reset Password notification under password policy",
+          "System automatically shares the password"
+        ],
+        "answer": "Configure an email template in the Reset Password notification under password policy",
+        "type": "radio",
+        "explanation": "The correct approach for sharing a newly reset password is to configure an email template within the Reset Password notification under the applicable password policy. This ensures that the user receives the new password in a secure and standardized manner. Other options, such as using a Change Password Notification or User Update Rule, are incorrect as they apply to different scenarios.",
+        "reference": {
+          "document": "Saviynt Password Policy Documentation",
+          "url": "https://docs.saviynt.com/docs/eic-password-policy"
+        }
+      },
+      {
+        "id": 12,
+        "question": "The EIC administrator needs to display the list of countries stored in the Saviynt database. Which of the following are the correct options under Dynamic Attribute > 'Attribute Type' to obtain values from the database?",
+        "options": [
+          "Multiple select from SQL query",
+          "Multiple select from list",
+          "String",
+          "Single select from SQL query"
+        ],
+        "answer": [
+          "Single select from SQL query"
+        ],
+        "type": "checkbox",
+        "explanation": "The correct option is 'Single Select from SQL Query' because it dynamically retrieves distinct values from the Saviynt database using an SQL query, ensuring that the list of countries is always up-to-date. 'Multiple Select from List' may seem relevant since it allows selecting multiple values, but it only supports static, predefined lists, making it unsuitable for retrieving live data from the database. 'Multiple Select from SQL Query' is incorrect because it allows selecting multiple values when only a single selection is required. Lastly, 'String' allows free-text input, which does not enforce selecting valid values.",
+        "reference": {
+          "document": "Saviynt EIC Admin Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter13-Access-Requests/ars-mang-app-form-simple-forms.htm"
+        }
+      },
+      {
+        "id": 13,
+        "question": "A solution architect wants to design a form with dynamic attributes. The email address field should be displayed when a user selects the employee type as contractor and hidden when the user selects the employee type as employee. Select the correct configurations to achieve this. (multi-select)",
+        "options": [
+          "Define the child attribute emailAddress with Action String",
+          "Define the parent attribute employeeType with Action String",
+          "Set \"What action to perform when parent attribute changes?\" of employeeType attribute to Mapping",
+          "Set \"What action to perform when Parent attribute changes?\" of emailAddress attribute to Mapping"
+        ],
+        "answer": [
+          "Define the parent attribute employeeType with Action String",
+          "Set \"What action to perform when parent attribute changes?\" of employeeType attribute to Mapping",
+          "Set \"What action to perform when Parent attribute changes?\" of emailAddress attribute to Mapping"
+        ],
+        "type": "checkbox",
+        "explanation": "To dynamically display or hide the emailAddress field based on the employee type selection, the parent attribute (employeeType) requires an Action String. This Action String defines when the child attribute (emailAddress) should be shown or hidden. Additionally, a mapping action must be configured for the parent attribute to trigger updates to the child attribute, and the child attribute must be linked to the parent attribute with its own mapping action. The Action String is defined only for the parent attribute, not the child attribute.",
+        "reference": {
+          "document": "Enterprise Identity Cloud Administration Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter13-Access-Requests/ars-mang-app-form-set-relationships.htm#show_and_hide_attributes"
+        }
+      },
+      {
+        "id": 14,
+        "question": "what are the different types of email notifiations that can be triggered from campaign? (multi-select)",
+        "options": [
+          "reminder email",
+          "campaign launch email",
+          "escalation email",
+          "campaign expiry email"
+        ],
+        "answer": [
+          "reminder email",
+          "campaign launch email",
+          "escalation email",
+          "campaign expiry email"
+        ],
+        "type": "checkbox"
+      },
+      {
+        "id": 15,
+        "question": "during a user manager campaign, if one of the managers leaves the organization, how will the certifications be transferred?",
+        "options": [
+          "certifications will automatically get transferred to new manager based on rule",
+          "it is not possible for an active campaign",
+          "manually update the certifications and modify managers",
+          "run a campaign job to update manager"
+        ],
+        "answer": "certifications will automatically get transferred to new manager based on rule",
+        "type": "radio"
+      },
+      {
+        "id": 16,
+        "question": "a certifier wants to certify his/her access. Does Saviynt allow to perform this in a role owner campaign?",
+        "options": [
+          "No, certifiers are not permitted to take actions on their own access",
+          "Access can only be certified by Managers",
+          "yes, it is configurable to take actions on their own access",
+          "yes, by default certifiers are permitted to take actions on their own access"
+        ],
+        "answer": "No, certifiers are not permitted to take actions on their own access",
+        "type": "radio"
+      },
+      {
+        "id": 17,
+        "question": "select the different authentication types supported by the REST connector. (mutli-select)",
+        "options": [
+          "BasicWithHMAC",
+          "client certificate based authentication",
+          "basic",
+          "BasicWithAccessToken"
+        ],
+        "answer": "BasicWithHMAC",
+        "type": "checkbox"
+      },
+      {
+        "id": 18,
+        "question": "What methods are available for integrating applications with Saviynt Enterprise Identity Cloud (EIC) (multi-select)",
+        "options": [
+          "upload connection file",
+          "application onboarding using design mode",
+          "classic integration using  connectors"
+        ],
+        "answer": [
+          "upload connection file",
+          "application onboarding using design mode",
+          "classic integration using  connectors"
+        ],
+        "type": "checkbox"
+      },
+      {
+        "id": 19,
+        "question": "while running the access import job, what is the RANK of the owner imported into the EIC from the Target Application?",
+        "options": [
+          "configurable within the JSON",
+          "configurable within the endpoint",
+          "only rank 1",
+          "both rank1 and rank2"
+        ],
+        "answer": "configurable within the JSON",
+        "type": "radio"
+      },
+      {
+        "id": 20,
+        "question": "what configurations are used in the JSON to verify the API URL and the response in the log file?",
+        "options": [
+          "\"showLogs\":true",
+          "\"SetLogFile\":true",
+          "\"DebugLogs:yes",
+          "none of the above"
+        ],
+        "answer": "\"showLogs\":true",
+        "type": "radio"
+      },
+      {
+        "id": 21,
+        "question": "EIC Admin encounters an error \"Connection Name Specified in accountJSON is not found\" while running the WSRETRY job. Which JSON needs to be corrected?",
+        "options": [
+          "update the correct connection name in ImportAccountJSON",
+          "update the correct connection name in ImportUserJSON",
+          "update the correct connection name in CreateAccountJSON",
+          "update the correct connection name in ImportAccountEntJSON"
+        ],
+        "answer": "update the correct connection name in ImportAccountJSON",
+        "type": "radio"
+      },
+      {
+        "id": 22,
+        "question": "Which parameter can be used to manipulate data while importing from the target application in REST connector?",
+        "options": ["#VALUE#", "#textApiKeyField#", "#CONST#", "#CHAR#"],
+        "answer": "#VALUE#",
+        "type": "radio"
+      },
+      {
+        "id": 23,
+        "question": "While troubleshooting a REST Connector account provisioning issue, the EIC administrator wants to view the API response in the logs. Which attribute will the administrator enable under CreateAccountJSON to hide or show API response received from the target applications?",
+        "options": [
+          "NO configuration needed, API responses are always logged in EIC Debug logs",
+          "\"showLogs\":\"true\"",
+          "\"APIResponses\":\"true\"",
+          "\"showResponse\":\"true\""
+        ],
+        "answer": "NO configuration needed, API responses are always logged in EIC Debug logs",
+        "type": "radio"
+      },
+      {
+        "id": 24,
+        "question": "Which credential vaults are supported by the Active Directory connector? (multi-select)",
+        "options": ["HashiCorp", "BeyondTrust", "CyberArk", "Fortanix"],
+        "answer": ["HashiCorp", "CyberArk"],
+        "type": "checkbox",
+        "explanation": "Saviynt’s Active Directory connector supports integration with multiple credential vaults to securely retrieve and manage credentials. The supported credential vaults include:\n\n- **HashiCorp Vault**: Offers secure storage and retrieval of secrets required for connecting to Active Directory.\n- **CyberArk Vault**: Supports integration for credential management with both PVWA and CCP modes.\n\nWhile 'BeyondTrust' is commonly used for privileged access management, it is not listed as a supported vault for Saviynt's Active Directory connector.",
+        "reference": {
+          "document": "Saviynt Enterprise Identity Cloud Documentation - Active Directory Integration Overview",
+          "url": "https://docs.saviyntcloud.com/bundle/AD-v24x/page/Content/Active-Directory-Integration-Overview.htm"
+        }
+      },
+      {
+        "id": 25,
+        "question": "which application is NOT supported by EIC Group management",
+        "options": [
+          "UNIX groups",
+          "Workday groups",
+          "Azure AD groups",
+          "ADSI groups"
+        ],
+        "answer": "UNIX groups",
+        "type": "radio"
+      },
+      {
+        "id": 26,
+        "question": "which of the following details can be updated for a group using EIC Group Management?",
+        "options": [
+          "basic details of the group in the role details page",
+          "add or remove owners for the roles in the Role Owner page",
+          "Modify the rank of a role owner",
+          "all of the above"
+        ],
+        "answer": "basic details of the group in the role details page",
+        "type": "radio"
+      },
+      {
+        "id": 27,
+        "question": "which of the following steps are mandatory to execute 'Deprovision Role' as a default action for Analytics?",
+        "options": [
+          "ensure that the 'Execute Default action for analytics' check box is selected in RunAllAnalytics job",
+          "ensure that the 'Deprovision Role' is not defined as 'Default_Action_for_Analytics' in the analytics query",
+          "analytics query must have not userkey attribute",
+          "all of the above"
+        ],
+        "answer": "ensure that the 'Execute Default action for analytics' check box is selected in RunAllAnalytics job",
+        "type": "radio"
+      },
+      {
+        "id": 28,
+        "question": "Which of the following use cases are achievable using the Analytics module in EIC? (Select 2 options)",
+        "options": [
+          "Send a separate email to each user record of the analytic report",
+          "Find out the orphan accounts and map them to respective users",
+          "Use analytics to erase PII data for inactive users",
+          "Create actionable analytics to change user password"
+        ],
+        "answer": [
+          "Send a separate email to each user record of the analytic report",
+          "Find out the orphan accounts and map them to respective users"
+        ],
+        "type": "checkbox",
+        "explanation": "The Analytics module in EIC enables functionalities such as sending individual email notifications based on analytic reports and identifying orphan accounts for remediation. Using analytics for PII data erasure or password change is not a supported feature.",
+        "reference": {
+          "document": "Saviynt EIC Analytics Guide",
+          "url": "https://docs.saviynt.com/eic/analytics-module"
+        }
+      },
+      {
+        "id": 29,
+        "question": "how can you re-trigger rules which failed to trigger without updating the users?",
+        "options": ["Archived rule trail"],
+        "answer": "Archived rule trail",
+        "type": "radio"
+      },
+      {
+        "id": 30,
+        "question": "Which HTTP status code is returned in the API response when the access token does not have the required access to invoke the specific API?",
+        "options": ["403", "401", "503", "200"],
+        "answer": "403",
+        "type": "radio"
+      },
+      {
+        "id": 31,
+        "question": "In EIC Service Account Management, when the current owner is terminated, how does EIC identify the new owner?",
+        "options": [
+          "the new owner is defined in the current owner's user attribute : \"Owner on Terminate\"",
+          "the new owner is identified based on SQL query configured in global configuration",
+          "the new owner is defined in the manage owners page",
+          "the new owner is defined in the service account attribute: \"Owner on Terminate\""
+        ],
+        "answer": "the new owner is defined in the current owner's user attribute : \"Owner on Terminate\"",
+        "type": "radio"
+      },
+      {
+        "id": 32,
+        "question": "In EIC, how is the accountname for the service account created? (choose 2 options)",
+        "options": [
+          "as defined in global configurations -> Account Name Rule",
+          "enter manually while requesting a service account",
+          "as defined in endpoint ->Service account name rule",
+          "as defined in connection -> create account JSON"
+        ],
+        "answer": "as defined in global configurations -> Account Name Rule",
+        "type": "radio"
+      },
+      {
+        "id": 33,
+        "question": "in saviynt app for servicenow, the manager is submitting a request for his subordinate, who is a valid SNOW user. However, when searching for the user, they are not appearing in the requests. What could be the potential issue?",
+        "options": [
+          "user already has access to the selected application",
+          "SNOW user is not linked to imported saviynt user",
+          "the logged in manager requires additional access to submit request",
+          "user does not have the selected application account"
+        ],
+        "answer": "user already has access to the selected application",
+        "type": "radio"
+      },
+      {
+        "id": 34,
+        "question": "the administrator has configured EIC to create tickets in Servicenow for disconnected applications. What job does he have to configure so that EIC can sync ServiceNow ticket status with WSRETRY status?",
+        "options": [
+          "status sync job needs to be configured",
+          "the servicenow ticket status cannot be synchronized to EIC",
+          "WSRETRY will also sync the ticket status with EIC; no additional job is required",
+          "EIC has a built-in job that automatically polls in the background and synchronizes the status"
+        ],
+        "answer": "status sync job needs to be configured",
+        "type": "radio"
+      },
+      {
+        "id": 35,
+        "question": "After 30 days of going live, the administrator noticed connection errors with the Saviynt app for servicenow, which is used by end users to submit access requests. NO changes have been made to Saviynt EIC or Servicenow. What configuration should the administrator examine to resolve the issue? (select 2 options)",
+        "options": [
+          "review the refreshtoken used in the connection, to check if it is expired",
+          "review the accesstoken used in the connection, to check if it is expired",
+          "check the service account used to generate the tokens is active",
+          "check if the service account used has access to getConnection API"
+        ],
+        "answer": "review the refreshtoken used in the connection, to check if it is expired",
+        "type": "radio"
+      },
+      {
+        "id": 36,
+        "question": "in the saviynt app for servicenow, what options are available to refresh the RITM status in  the servicenow app based on the respective saviynt's status? (choose 2 options)",
+        "options": [
+          "regenerate application catalog item",
+          "make a postman API Call",
+          "it will be automatically updated in 1 minute via request item history job in ServiceNow",
+          "Click refresh button on the RITM page in Servicenow"
+        ],
+        "answer": "regenerate application catalog item",
+        "type": "radio"
+      },
+      {
+        "id": 37,
+        "question": "EIC is configured to create tickets in servicenow for requests for disconnected applications. The end user selects 3 different entitlements for a disconnected application and submits the request. Will EIC process this request?",
+        "options": [
+          "EIC will combine all three entitlements and create one ticket in servicenow",
+          "not a valid scenario because EIC does not support multiple entitlement requests when servicenow is integrated as the ticketing system",
+          "EIC will create three separate tickets in servicenow, one for each of the three entitlements",
+          "IF the \"enable multi entitlement request\" option is selected, then three tickets will be created in servicenow, otherwise, only one ticket will be created"
+        ],
+        "answer": "EIC will combine all three entitlements and create one ticket in servicenow",
+        "type": "radio"
+      },
+      {
+        "id": 38,
+        "question": "what are the different authentication modes supported for SMTP configurations",
+        "options": ["OAuth", "none of the above", "basic", "NTML"],
+        "answer": "OAuth",
+        "type": "radio"
+      },
+      {
+        "id": 39,
+        "question": "the EIC Administrator must address the email generation issues caused by accent characters in some user's names. What are the potential options to resolve this issue?",
+        "options": ["rules", "Roles", "API", "Datasets"],
+        "answer": "rules",
+        "type": "radio"
+      },
+      {
+        "id": 40,
+        "question": "An EIC administrator has a requirement to execute provisioning as soon as the user import is completed, what type of job can be configured to achieve this?",
+        "options": [
+          "WSRetry job",
+          "Trigger chain job",
+          "single threaded job",
+          "multi threading job"
+        ],
+        "answer": "WSRetry job",
+        "type": "radio"
+      },
+      {
+        "id": 41,
+        "question": "which of the following statements is correct?",
+        "options": [
+          "requests for account and access must be created separately",
+          "provisioning tasks will get created in EIC only when you run the provisioning job",
+          "a workflow is madatory to be attached to a security system for the task to be picked up and processed by provisioning job",
+          "a newly created workflow wont appear as an active workflow in the list of worklows until it is approved from Admin > workflow> workflow approved"
+        ],
+        "answer": "requests for account and access must be created separately",
+        "type": "radio"
+      },
+      {
+        "id": 42,
+        "question": "Solution architect needs to establish a parent-child relationship between departments. and their managers using dynamic attrubutes. which attribute types are supported (select multiple)",
+        "options": [
+          "enum (parent) single select from SQL Query (child)",
+          "Sting (child), single select from SQL Query (parent)",
+          "single select from SQL Query (parent), single select from SQL (child)",
+          "Enum (child), single select from SQL Query (parent)"
+        ],
+        "answer": "enum (parent) single select from SQL Query (child)",
+        "type": "radio"
+      },
+      {
+        "id": 43,
+        "question": "How many reminder email notifications does a campaign support in EIC?",
+        "options": ["1", "10", "5", "it is conifgurable"],
+        "answer": "1",
+        "type": "radio"
+      },
+      {
+        "id": 44,
+        "question": "what are the valid options in the field \"objects to be included\" when configuring an application owner campaign (select multiple)",
+        "options": [
+          "account",
+          "entitlement",
+          "application Pole",
+          "enterprise pole"
+        ],
+        "answer": "account",
+        "type": "radio"
+      },
+      {
+        "id": 45,
+        "question": "which connection attribute is used to store and execute InLinePreproccessors",
+        "options": [
+          "MODIFYUSEDATAJSON",
+          "ACCOUNTNAMERULE",
+          "IMPORTJSON",
+          "createupdatemappings"
+        ],
+        "answer": "MODIFYUSEDATAJSON",
+        "type": "radio"
+      },
+      {
+        "id": 46,
+        "question": "what methods are available for integrating applications with Saviynt Enterprise Idenity Cloud (EIC)? (select multiple)",
+        "options": [
+          "configure an inline preprocessor with MODIFYUSERDATAJSON",
+          "none of the above",
+          "configure an inline preprocessor with IMPORTUSERJSON",
+          "configure an inline preprocessor with USERUPDATEJSON"
+        ],
+        "answer": "configure an inline preprocessor with MODIFYUSERDATAJSON",
+        "type": "radio"
+      },
+      {
+        "id": 47,
+        "question": "what features are supported by OOTB EIC REST connector (select multiple)",
+        "options": [
+          "incremental import of users",
+          "ConfigJSON",
+          "statusthresholdConfig",
+          "COnnectionJSON"
+        ],
+        "answer": "incremental import of users",
+        "type": "radio"
+      },
+      {
+        "id": 48,
+        "question": "in a REST connector which attribute of the connection JSON is required to validate if the connection to the target application is successful?",
+        "options": [
+          "AuthError",
+          "testConnectionParams",
+          "testStatusParams",
+          "(ShowLog=\"true)"
+        ],
+        "answer": "AuthError",
+        "type": "radio"
+      },
+      {
+        "id": 49,
+        "question": "which attribute of ImportAccountEntJSON contains the mapping between the target application objects and IGA account?",
+        "options": [
+          "colsTOPropsMap",
+          "keyField",
+          "accountParams",
+          "entitlementParams"
+        ],
+        "answer": "colsTOPropsMap",
+        "type": "radio"
+      },
+      {
+        "id": 50,
+        "question": "what is the unique identifier parameter name used in the Database connector for User Import?",
+        "options": [
+          "userReconcilliationField",
+          "useridentifier",
+          "mapfield",
+          "userUniqueIdentifier"
+        ],
+        "answer": "userReconcilliationField",
+        "type": "radio"
+      },
+      {
+        "id": 51,
+        "question": "which credential vaults are supported by Active Directory connector? (select multiple)",
+        "options": [
+          "colsToPropsMap map account objects in the target application with account attributs in EIC",
+          "listfield variable to specify the name of the field that uniquely defines whether the incoming account object is a new account or existing account",
+          "entitlementParams contains mapping details of accounts to entitlements",
+          "account and entitlements are imported to EIC via the ImportAccountsEntJSOn parameter"
+        ],
+        "answer": "colsToPropsMap map account objects in the target application with account attributs in EIC",
+        "type": "radio"
+      },
+      {
+        "id": 52,
+        "question": "In EIC what happens to the status of an entitlement after the role deletion request is approved?",
+        "options": [
+          "the entitlement gets deleted along with the Role",
+          "the status of the entitlement changes from Active to Inactive",
+          "the status of the entitlement remains active",
+          "the status of the entitlement changes to deleted"
+        ],
+        "answer": "the entitlement gets deleted along with the Role",
+        "type": "radio"
+      },
+      {
+        "id": 53,
+        "question": "which of the following options can be used to create aAnalytics controls (select multiple)",
+        "options": [
+          "using SQL query",
+          "using data query",
+          "run time analytics",
+          "using Preprocessor Query"
+        ],
+        "answer": "using SQL query",
+        "type": "radio"
+      },
+      {
+        "id": 54,
+        "question": "an EIC administrator wants to retrieve a report of users and their assigned SAV roles. What are the ways in which it can be achieved? (select multiple)",
+        "options": [
+          "using enhanced query",
+          "create analytics with the SQL Query to get the data and select the checkbox 'Send Email as attatchment in analytics configuration",
+          "create analytics with the SQL Query to get the data and export as CSV/Excel",
+          "run a SQL Queery to retrieve data in data analyzer"
+        ],
+        "answer": "using enhanced query",
+        "type": "radio"
+      },
+      {
+        "id": 55,
+        "question": "what are the different actions supported by User Update Rule?",
+        "options": [
+          "trigger technical rule",
+          "generate username",
+          "send email",
+          "all of the above"
+        ],
+        "answer": "trigger technical rule",
+        "type": "radio"
+      },
+      {
+        "id": 56,
+        "question": "which among the following are best practices recommended to configure a technical rule in Saviynt Identity Cloud?",
+        "options": [
+          "configure retrofit for all the rules",
+          "all of the above",
+          "use advanced configurations",
+          "always have user statskey= 1 check where ever applicable"
+        ],
+        "answer": "configure retrofit for all the rules",
+        "type": "radio"
+      },
+      {
+        "id": 57,
+        "question": "which of the following options are supported for Active Directory Service Account reconciliation (select multiple)",
+        "options": [
+          "account type",
+          "service account owner",
+          "user filter/ object filter",
+          "all of the above"
+        ],
+        "answer": "account type",
+        "type": "radio"
+      },
+      {
+        "id": 58,
+        "question": "which of the following statements are correct about Service account Management?",
+        "options": [
+          "service account can be created only through request process in EIC",
+          "it is mandatory to define account type before service accounts can be created",
+          "user filter to determine who can see the endpoint when requesting a service account is supported",
+          "when modifying service accounts, both ownership and access can be changed"
+        ],
+        "answer": "service account can be created only through request process in EIC",
+        "type": "radio"
+      },
+      {
+        "id": 59,
+        "question": "what types of requests are supported in the Saviynt app for servicenow (select multiple)",
+        "options": [
+          "access request to enterprise role",
+          "access request to application role",
+          "access request for entitlement",
+          "create enterprise role request"
+        ],
+        "answer": "access request to enterprise role",
+        "type": "radio"
+      },
+      {
+        "id": 60,
+        "question": "An EIC administrator needs to update the label for CUSTOMPROPERTY 5 to 'Business Code' where can this change be made in the EIC user interface?",
+        "options": [
+          "CUSTOMPROPERTY labels cannot be changed",
+          "upload the new label via a CSV file",
+          "go to ADMIN>Settings>Manage Labels and edit the label",
+          "go to ADMIN>global configuration and edit the label"
+        ],
+        "answer": "CUSTOMPROPERTY labels cannot be changed",
+        "type": "radio"
+      },
+      {
+        "id": 61,
+        "question": "where can you review the modifications made to the DATASET in EIC",
+        "options": [
+          "application dataset logs",
+          "application audit logs",
+          "application job logs",
+          "application import logs"
+        ],
+        "answer": "application dataset logs",
+        "type": "radio"
+      },
+      {
+        "id": 62,
+        "question": "when importing users to EIC, the import job fails due to user attributes with accented characters. What out-of-the-box (OOTB) option can the EIC administrator use to handle such issues?",
+        "options": [
+          "enable accept accent characters in global configuration",
+          "use preprocessor queries in ModifyUserJSONData",
+          "no additional configuration required, saviynt automatically handles accent characters",
+          "use EIC DB funtion - FN_EIC_REPLACE, to replace accent characters with accepted characters"
+        ],
+        "answer": "enable accept accent characters in global configuration",
+        "type": "radio"
+      },
+      {
+        "id": 63,
+        "question": "Where do you enable the rule to retrofit (repair rule to user mappings) in Saviynt EIC?",
+        "options": [
+          "Business rule",
+          "Endpoint",
+          "UserUpdate Rule",
+          "Global configuration"
+        ],
+        "answer": "Global configuration",
+        "type": "radio",
+        "explanation": "To enable the rule for retrofitting (repairing rule-to-user mappings) in Saviynt EIC, navigate to the Global Configuration settings. This setting ensures that any changes in user attributes are appropriately reflected in user-role or user-entitlement mappings, maintaining consistency across the system.",
+        "reference": {
+          "document": "Saviynt EIC Administration Guide",
+          "url": "https://docs.saviyntcloud.com/bundle/EIC-Admin-v24x/page/Content/Chapter05-Policies/Repairing-Rule-User-Mappings.htm"
+        }
+      }
+    ]
+  }
